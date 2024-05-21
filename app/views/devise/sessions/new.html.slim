@@ -1,0 +1,20 @@
+.p-devise__inner
+
+  h2.p-devise__title
+    | twitter_cloneにログイン
+  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+    .p-devise__form-field
+      = f.label :email, class: 'p-devise__form-label'
+    = f.email_field :email, autofocus: true, autocomplete: "email", class: 'p-devise__form-input'
+     .p-signin__form-field
+    br
+
+      = f.label :password, class: 'p-devise__form-label'
+    = f.password_field :password, autocomplete: "current-password", class: 'p-devise__form-input'
+    - if devise_mapping.rememberable?
+       .p-devise__form-field
+        = f.check_box :remember_me
+        = f.label :remember_me, class: 'p-devise__form-label'
+    .p-devise__form-actions
+      = f.submit "ログイン", class: 'c-button p-devise__form-button'
+  = render "devise/shared/links"
