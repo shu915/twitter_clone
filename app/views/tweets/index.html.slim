@@ -1,0 +1,9 @@
+.container 
+  h1 トップ画面
+    
+  p 
+    | ログイン中のユーザー：
+    = @user&.display_name
+  button ツイートする
+
+  = link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete }, class: 'btn btn-primary'

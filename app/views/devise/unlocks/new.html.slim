@@ -1,0 +1,11 @@
+.p-devise__inner
+  h2
+    | アカウントのロックを解除する
+  = form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f|
+    = render "devise/shared/error_messages", resource: resource
+    .p-devise__form-field
+      = f.label :email, class: 'p-devise__form-label'
+    = f.email_field :email, autofocus: true, autocomplete: "email", class: 'p-devise__form-input'
+    .p-devise__form-actions
+      = f.submit "ロックを解除", class: 'c-button p-devise__form-button'
+  = render "devise/shared/links"
