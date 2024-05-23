@@ -1,0 +1,18 @@
+doctype html
+html
+  head
+    title
+      | Myapp
+    meta[name="viewport" content="width=device-width,initial-scale=1"]
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = javascript_include_tag "application", "data-turbo-track": "reload", defer: true
+  body
+    .container 
+      - if flash[:notice]
+        = render partial: 'shared/flash_notice'
+
+      - if flash[:alert]
+        = render partial: 'shared/flash_alert'
+    = yield

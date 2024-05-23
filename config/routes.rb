@@ -1,9 +1,16 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :tasks
+  devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  # root "articles#index"
+  # devise_scope :user do
+  #   get "/" => "users/sessions#new"
+  # end
+
+  root 'tweets#index'
+  resources :tweets
+
+  mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 end
