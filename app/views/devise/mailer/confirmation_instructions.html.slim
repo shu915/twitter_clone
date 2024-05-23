@@ -1,0 +1,10 @@
+p
+  | ようこそ
+  = @email
+  | さん!
+p
+  | この度は、twitter_cloneに登録してくださり、ありがとうございます。
+p
+  | 以下のリンクから、アカウントを有効化することができます。
+p
+  = link_to 'アカウントを有効化する', confirmation_url(@resource, confirmation_token: @token)

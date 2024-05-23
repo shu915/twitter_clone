@@ -29,5 +29,7 @@ module Myapp
       g.factory_bot false
     end
     config.action_view.default_form_builder = 'ApplicationFormBuilder'
+
+    config.i18n.default_locale = :ja
   end
 end
