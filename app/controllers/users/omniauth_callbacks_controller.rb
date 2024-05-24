@@ -22,6 +22,26 @@ module Users
     #   super
     # end
 
+    skip_before_action :verify_authenticity_token, only: :github
+
+    def github
+      # ユーザー情報を取得
+      @user = User.from_omniauth(request.env['omniauth.auth'])
+
+      # ユーザーを検索または作成
+      if @user&.persisted?
+        sign_in_and_redirect @user, event: :authentication
+        flash[:notice] = 'GitHubによるログインに成功しました'
+      else
+        flash[:alert] = 'ユーザーが見つかりませんでした。登録してください。'
+        redirect_to new_user_registration_url
+      end
+    end
+
+    def failure
+      redirect_to root_path
+    end
+
     # protected
 
     # The path used when OmniAuth fails

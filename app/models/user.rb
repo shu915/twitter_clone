@@ -32,13 +32,25 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :confirmable, :lockable, :timeoutable, :trackable, :omniauthable
+         :confirmable, :lockable, :timeoutable, :trackable, :omniauthable, omniauth_providers: %i[github]
+  has_many :authorizations, dependent: :destroy
 
   before_create :set_default_name
 
   validates :tel, presence: true, length: { maximum: 20 }, numericality: { only_integer: true }
   validates :birthday, presence: true,
                        format: { with: /\A\d{4}-\d{1,2}-\d{1,2}\z/, message: 'は「YYYY-MM-DD」の形式で入力してください' }
+
+  def self.from_omniauth(auth)
+    user = where(email: auth.info.email).first
+
+    return if user.blank?
+
+    authorization = user.authorizations.find_or_initialize_by(provider: auth.provider, uid: auth.uid)
+    user.authorizations << authorization unless user.authorizations.exists?(provider: auth.provider, uid: auth.uid)
+    user.save!
+    user
+  end
 
   private
 

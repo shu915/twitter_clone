@@ -6,4 +6,9 @@
   background-color: $primary-color;
   color: #fff;
   font-size: 1.2rem;
+
+  &__GitHub {
+    background: #333;
+    border: 2px solid #333;
+  }
 }

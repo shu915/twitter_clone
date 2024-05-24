@@ -1,4 +1,9 @@
 div.p-devise__links
+  - if devise_mapping.omniauthable?
+    - resource_class.omniauth_providers.each do |provider|
+      = button_to "#{OmniAuth::Utils.camelize(provider)}でログイン", omniauth_authorize_path(resource_name, provider), data: { turbo: false }, class: "c-button c-button__#{OmniAuth::Utils.camelize(provider)}"
+      br
+
   - if controller_name != 'sessions'
     = link_to "ログインする", new_session_path(resource_name), class: 'p-devise__link'
     br
@@ -14,7 +19,4 @@ div.p-devise__links
   - if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks'
     = link_to "アカウントのロックを解除したい。", new_unlock_path(resource_name), class: 'p-devise__link'
     br
-  - if devise_mapping.omniauthable?
-    - resource_class.omniauth_providers.each do |provider|
-      = button_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), data: { turbo: false }
-      br
+  
