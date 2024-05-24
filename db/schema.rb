@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_05_17_041444) do
+ActiveRecord::Schema[7.0].define(version: 2024_05_23_045222) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "authorizations", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "provider"
+    t.string "uid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["uid", "provider"], name: "index_authorizations_on_uid_and_provider", unique: true
+    t.index ["user_id"], name: "index_authorizations_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "tel", null: false
@@ -45,4 +55,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_17_041444) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "authorizations", "users"
 end

@@ -9,10 +9,10 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 admin = User.new(
-  email: 'chukichi915@gmail.com',
+  email: 'shu915.web.creation@gmail.com',
   tel: '07010607847',
   birthday: '1987-09-15',
-  password: 'adminmin'
+  password: ENV['ADMIN_PASSWORD']
 )
 admin.skip_confirmation!
 admin.save
