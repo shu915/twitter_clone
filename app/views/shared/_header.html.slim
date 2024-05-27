@@ -1,0 +1,14 @@
+div.p-header
+  div.l-inner.p-header__inner
+    h1.p-header__title 
+      i.bi.bi-twitter.p-header__title-icon
+      | twitter_clone
+
+    nav.p-header__nav
+      ul.p-header__nav-list
+        li.p-header__nav-item
+          - if current_user
+            = link_to 'ログアウト', destroy_user_session_path, class: 'btn btn-primary p-header_nav-link', data: { turbo_method: :delete }
+          - else 
+            = link_to 'ログイン', new_user_session_path, class: 'btn btn-primary'
+            = link_to 'サインアップ', new_user_registration_path, class: 'btn btn-outline-primary p-header_nav-link ms-2'
