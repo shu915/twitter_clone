@@ -8,7 +8,7 @@
 #  tel                    :string           not null
 #  birthday               :date             not null
 #  account_name           :string           not null
-#  display_name           :string           default("名前を設定してね"), not null
+#  display_name           :string           not null
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  reset_password_token   :string
@@ -35,7 +35,19 @@ class User < ApplicationRecord
          :confirmable, :lockable, :timeoutable, :trackable, :omniauthable, omniauth_providers: %i[github]
   has_many :authorizations, dependent: :destroy
 
+  has_many :active_relationships, class_name: 'Follow', foreign_key: 'following_user_id', dependent: :destroy,
+                                  inverse_of: :following_user
+  has_many :following_users, through: :active_relationships, source: :followed_user
+  has_many :passive_relationships, class_name: 'Follow', foreign_key: 'followed_user_id', dependent: :destroy,
+                                   inverse_of: :followed_user
+  has_many :followed_users, through: :passive_relationships, source: :following_user
+
+  has_many :tweets, dependent: :destroy
+
+  has_one_attached :avatar
+
   before_create :set_default_name
+  after_create :attach_default_avatar
 
   validates :tel, presence: true, length: { maximum: 20 }, numericality: { only_integer: true }
   validates :birthday, presence: true,
@@ -59,5 +71,12 @@ class User < ApplicationRecord
     random_name = "@#{random_string}"
     self.account_name = random_name
     self.display_name = random_name
+  end
+
+  def attach_default_avatar
+    return if avatar.attached?
+
+    avatar.attach(io: File.open(Rails.root.join('app/assets/images/default_profile.png')),
+                  filename: 'default_profile.png', content_type: 'image/png')
   end
 end

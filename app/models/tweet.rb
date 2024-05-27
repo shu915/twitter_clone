@@ -2,17 +2,14 @@
 
 # == Schema Information
 #
-# Table name: authorizations
+# Table name: tweets
 #
 #  id         :bigint           not null, primary key
 #  user_id    :bigint           not null
-#  provider   :string
-#  uid        :string
+#  content    :text             not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-require 'rails_helper'
-
-RSpec.describe Authorization, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+class Tweet < ApplicationRecord
+  belongs_to :user
 end
