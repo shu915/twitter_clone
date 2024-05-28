@@ -1,9 +1,91 @@
-.container 
-  h1 トップ画面
-    
-  p 
-    | ログイン中のユーザー：
-    = @user&.display_name
-  button ツイートする
+.div.p-main
+  .div.l-inner.p-home__inner
+  
+    .p-home__sidebar 
+      nav.p-home__sidebar-nav
+        ul.p-home__sidebar-list
+          li.p-home__sidebar-item
+            = link_to root_path, class: 'p-home__sidebar-link' do
+              i.bi.bi-house-fill.p-home__sidebar-icon
+              | ホーム
+            end
 
-  = link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete }, class: 'btn btn-primary'
+          li.p-home__sidebar-item
+            = link_to root_path, class: 'p-home__sidebar-link' do
+              i.bi.bi-house-fill.p-home__sidebar-icon
+              | ホーム
+            end
+
+          li.p-home__sidebar-item
+            = link_to root_path, class: 'p-home__sidebar-link' do
+              i.bi.bi-house-fill.p-home__sidebar-icon
+              | ホーム
+            end
+
+          li.p-home__sidebar-item
+            = link_to root_path, class: 'p-home__sidebar-link' do
+              i.bi.bi-house-fill.p-home__sidebar-icon
+              | ホーム
+            end
+
+          li.p-home__sidebar-item
+            = link_to root_path, class: 'p-home__sidebar-link' do
+              i.bi.bi-house-fill.p-home__sidebar-icon
+              | ホーム
+            end
+
+          li.p-home__sidebar-item
+            = link_to root_path, class: 'p-home__sidebar-link' do
+              i.bi.bi-house-fill.p-home__sidebar-icon
+              | ホーム
+            end
+
+          li.p-home__sidebar-item
+            = link_to root_path, class: 'p-home__sidebar-link' do
+              i.bi.bi-house-fill.p-home__sidebar-icon
+              | ホーム
+            end
+          
+
+    .p-home__content
+      h2.p-home__title ホーム
+
+      div.p-home__tab-list
+        div.p-home__tab-item
+          = link_to 'おすすめ', root_path, class: 'p-home__tab-link'
+
+        div.p-home__tab-item
+          = link_to 'フォロー中', root_path(following: true), class: 'p-home__tab-link'
+      
+      
+      .p-home__form-wrap
+        .p-home__form-image 
+          = image_tag @user.avatar
+
+        = form_with model: @tweet, class: 'p-home__form-body' do |f|
+          = f.text_area :content, class: 'p-home__form-input', placeholder: 'いまどうしている？'
+
+          .p-home__form-button-wrap
+           = f.submit 'ツイートする', class: 'c-button p-home_form-button'
+
+
+
+          
+      ul.p-home__tweets-list
+        - @tweets.each do |tweet|
+         li.p-home__tweet-item
+          .p-home__tweet-avatar
+            = image_tag tweet.user.avatar
+          .p-home__tweet-content
+            .p-home__tweet-name-wrap
+              span.p-home__tweet-display-name
+                = tweet.user.display_name
+              span.p-home__tweet-account-name
+                = tweet.user.account_name
+              span.p-home__tweet-created_at 
+                = tweet.created_at.strftime("%Y年%m月%d日 %H:%M")
+            .p-home__tweet-text-wrap
+              = tweet.content
+
+      .p-home__tweets-paginate
+        = paginate @tweets
