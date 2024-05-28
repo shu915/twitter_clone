@@ -8,7 +8,7 @@
 #  tel                    :string           not null
 #  birthday               :date             not null
 #  account_name           :string           not null
-#  display_name           :string           default("名前を設定してね"), not null
+#  display_name           :string           not null
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  reset_password_token   :string
