@@ -12,9 +12,11 @@ html
     = render partial: 'shared/header'
 
     .container 
-      - if flash[:notice]
-        = render partial: 'shared/flash_notice'
+      
+      .p-main
+        - if flash[:notice]
+          = render partial: 'shared/flash_notice'
 
-      - if flash[:alert]
-        = render partial: 'shared/flash_alert'
-    = yield
+        - if flash[:alert]
+          = render partial: 'shared/flash_alert'
+        = yield

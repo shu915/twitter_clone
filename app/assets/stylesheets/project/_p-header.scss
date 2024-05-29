@@ -1,5 +1,15 @@
+@use "../global" as global;
+
 .p-header {
   max-width: 100%;
+  border-bottom: 1px #eee solid;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  height: 3.5rem;
+  z-index: 10;
 }
 
 .p-header__inner {
@@ -16,10 +26,10 @@
 
 .p-header__title {
   font-size: 1.5rem;
-  color: $primary-color;
+  color: global.$primary-color;
 }
 
 .p-header__title-icon {
-  color: $primary-color;
+  color: global.$primary-color;
   margin-right: 0.2rem;
 }

@@ -1,0 +1,45 @@
+@use "../global" as global;
+
+.c-tweet {
+  display: flex;
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.c-tweet__avatar {
+  width: 4rem;
+  height: 4rem;
+}
+.c-tweet__content {
+  margin-left: 1rem;
+}
+
+
+.c-tweet__display-name {
+  font-weight: bold;
+}
+
+.c-tweet__account-name {
+  color: #555;
+  font-size: 0.8rem;
+  margin-left: 0.5rem;
+}
+
+.c-tweet__created_at {
+  font-size: 0.7rem;
+  color: #555;
+  margin-left: 0.5rem;
+
+}
+
+.c-tweet__reply {
+  font-size: 0.9rem;
+}
+
+.c-tweet__reply-link {
+  color: global.$primary-color;
+}
+
+.c-tweet__text {
+
+}

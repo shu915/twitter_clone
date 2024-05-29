@@ -7,6 +7,9 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       t.date :birthday, null: false
       t.string :account_name, null: false
       t.string :display_name, null: false
+      t.string :location, default: '非公開'
+      t.string :url
+      t.text :self_intro
 
       ## Database authenticatable
       t.string :email,              null: false, default: ''

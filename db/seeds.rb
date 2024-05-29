@@ -19,13 +19,17 @@ users.each do |user_data|
     u.tel = user_data[:tel]
     u.birthday = user_data[:birthday]
     u.password = user_data[:password]
+    u.location = '東京都渋谷区'
+    u.url = 'https://shu-web-creation.com'
+    u.self_intro = 'Webデザイナーの山田花子です。東京出身、28歳。ユーザー目線のデザインを心がけています。
+                    旅行と写真撮影が趣味。インスピレーションを大切にしながら、これからも成長を続けていきます。よろしくお願いします！'
     u.skip_confirmation!
   end
 
   11.times do |i|
     Tweet.create(
       user_id: user.id,
-      content: "This is tweet #{i + 1} by #{user.email}"
+      content: "ツイートその #{i + 1} by #{user.email}"
     )
   end
 end
@@ -33,4 +37,17 @@ end
 user1 = User.find_by(email: 'user1@example.com')
 user2 = User.find_by(email: 'user2@example.com')
 
-Follow.create(following_user: user1, followed_user: user2)
+user1.followings << user2
+
+tweet1 = Tweet.find(1)
+tweet2 = Tweet.find(15)
+
+user1.liked_tweets << [tweet1, tweet2]
+
+tweet3 = Tweet.find(2)
+tweet4 = Tweet.find(20)
+
+user1.retweeted_tweets << [tweet3, tweet4]
+
+user1.comments.create(content: '返信コメントです', tweet: tweet1)
+user1.comments.create(content: '返信コメントです2', tweet: tweet2)

@@ -1,0 +1,20 @@
+@use "../global" as global;
+
+.btn-primary {
+  background-color: global.$primary-color;
+  &:hover {
+    background-color: #fff;
+    color: global.$primary-color;
+  }
+}
+
+.btn-outline-primary {
+  &:hover {
+    background-color: global.$primary-color;
+  }
+}
+
+img {
+  width: 100%;
+  height: auto;
+}

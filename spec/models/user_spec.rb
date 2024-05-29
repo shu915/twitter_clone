@@ -9,6 +9,9 @@
 #  birthday               :date             not null
 #  account_name           :string           not null
 #  display_name           :string           not null
+#  location               :string           default("非公開")
+#  url                    :string
+#  self_intro             :text
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  reset_password_token   :string
