@@ -1,66 +1,22 @@
-.div.p-main
-  .div.l-inner.p-home__inner
-  
-    .p-home__sidebar 
-      nav.p-home__sidebar-nav
-        ul.p-home__sidebar-list
-          li.p-home__sidebar-item
-            = link_to root_path, class: 'p-home__sidebar-link' do
-              i.bi.bi-house-fill.p-home__sidebar-icon
-              | ホーム
-            end
-
-          li.p-home__sidebar-item
-            = link_to root_path, class: 'p-home__sidebar-link' do
-              i.bi.bi-house-fill.p-home__sidebar-icon
-              | ホーム
-            end
-
-          li.p-home__sidebar-item
-            = link_to root_path, class: 'p-home__sidebar-link' do
-              i.bi.bi-house-fill.p-home__sidebar-icon
-              | ホーム
-            end
-
-          li.p-home__sidebar-item
-            = link_to root_path, class: 'p-home__sidebar-link' do
-              i.bi.bi-house-fill.p-home__sidebar-icon
-              | ホーム
-            end
-
-          li.p-home__sidebar-item
-            = link_to root_path, class: 'p-home__sidebar-link' do
-              i.bi.bi-house-fill.p-home__sidebar-icon
-              | ホーム
-            end
-
-          li.p-home__sidebar-item
-            = link_to root_path, class: 'p-home__sidebar-link' do
-              i.bi.bi-house-fill.p-home__sidebar-icon
-              | ホーム
-            end
-
-          li.p-home__sidebar-item
-            = link_to root_path, class: 'p-home__sidebar-link' do
-              i.bi.bi-house-fill.p-home__sidebar-icon
-              | ホーム
-            end
-          
+  .l-inner.p-main__inner
+    .p-main__sidebar
+      = render partial: 'shared/sidebar'
 
     .p-home__content
       h2.p-home__title ホーム
 
-      div.p-home__tab-list
-        div.p-home__tab-item
-          = link_to 'おすすめ', root_path, class: 'p-home__tab-link'
+      .p-home__tab-list
+        .p-home__tab-item
+          = link_to 'おすすめ', root_path, class: "p-home__tab-link #{ params[:following] ? '' : 'p-home__tab-link--active' }"
 
-        div.p-home__tab-item
-          = link_to 'フォロー中', root_path(following: true), class: 'p-home__tab-link'
+        .p-home__tab-item
+          = link_to 'フォロー中', root_path(following: true), class: "p-home__tab-link #{ params[:following] ? 'p-home__tab-link--active' : '' }"
+          
       
       
       .p-home__form-wrap
-        .p-home__form-image 
-          = image_tag @user.avatar
+        = link_to user_path(current_user), class: 'p-home__form-image' do 
+          = image_tag current_user.avatar
 
         = form_with model: @tweet, class: 'p-home__form-body' do |f|
           = f.text_area :content, class: 'p-home__form-input', placeholder: 'いまどうしている？'
@@ -71,21 +27,21 @@
 
 
           
-      ul.p-home__tweets-list
+      ul.p-home__tweet-list
         - @tweets.each do |tweet|
-         li.p-home__tweet-item
-          .p-home__tweet-avatar
+         li.c-tweet.p-home__tweet-item
+          .c-tweet__avatar
             = image_tag tweet.user.avatar
-          .p-home__tweet-content
-            .p-home__tweet-name-wrap
-              span.p-home__tweet-display-name
+          .c-tweet__content
+            .c-tweet__name-wrap
+              span.c-tweet__display-name
                 = tweet.user.display_name
-              span.p-home__tweet-account-name
+              span.c-tweet__account-name
                 = tweet.user.account_name
-              span.p-home__tweet-created_at 
+              span.c-tweet__created_at 
                 = tweet.created_at.strftime("%Y年%m月%d日 %H:%M")
-            .p-home__tweet-text-wrap
+            .c-tweet__text-wrap
               = tweet.content
 
-      .p-home__tweets-paginate
+      .p-home__tweet-page
         = paginate @tweets

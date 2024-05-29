@@ -1,6 +1,8 @@
+@use "../global/" as global;
+
 .p-flash {
   width: 80%;
-  background-color: #1da1f2;
+  background-color: global.$primary-color;
   border-radius: 2rem;
   padding: 1rem;
   color: #fff;

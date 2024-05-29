@@ -1,0 +1,85 @@
+  .l-inner.p-main__inner
+    .p-main__sidebar
+      = render partial: 'shared/sidebar'
+
+    .p-profile
+      
+      .p-profile__header
+        = image_tag @user.header_image, alt: 'プロフィールのヘッダーイメージ'
+      .p-profile__content
+        .p-profile__avatar 
+          = image_tag @user.avatar, alt: 'プロフィール画像'
+        .p-profile__edit-button-wrap 
+          = link_to 'プロフィールを編集', edit_user_path, class: 'p-profile__edit-button c-button'
+        .p-profile__display-name
+          = @user.display_name
+        .p-profile__account-name
+          = @user.account_name
+        .p-profile__self-intro
+          = @user.self_intro
+        .p-profile__detail
+          span.p-profile__location
+            i.bi.bi-geo-alt-fill
+            = @user.location
+          - if @user.url?
+            span.p-profile__url
+             i.bi.bi-link-45deg
+             = link_to @user.url, @user.url
+          span.p-profile__birthday
+            i.bi.bi-balloon 
+            | 誕生日:
+            = @user.birthday
+        .p-profile__created-at
+          i.bi.bi-calendar-check
+          = @user.created_at.strftime('%Y年%m月')
+          | からtwiiterを利用しています
+        
+        .p-profile__follow-wrap
+          span.p-profile__followring
+            = @user.followings.count
+            |  フォロー中
+          span.p-profile__followed
+            = @user.followeds.count
+            |  フォロワー
+      
+      .p-profile__tab
+        .p-profile__tab-list
+          .p-profile__tab-item
+            = link_to 'ツイート', user_path, class: "p-profile__tab-link #{ !params[:tab] ? 'p-profile__tab-link--active' : '' }"
+
+       
+          .p-profile__tab-item
+            = link_to 'いいね', user_path(tab: 'like'), class: "p-profile__tab-link #{ params[:tab] === 'like' ? 'p-profile__tab-link--active' : '' }"
+
+      
+          .p-profile__tab-item
+            = link_to 'リツイート', user_path(tab: 'retweet'), class: "p-profile__tab-link #{ params[:tab] === 'retweet' ? 'p-profile__tab-link--active' : '' }"
+
+        
+          .p-profile__tab-item
+            = link_to 'コメント', user_path(tab: 'comment'), class: "p-profile__tab-link #{ params[:tab] === 'comment' ? 'p-profile__tab-link--active' : '' }"
+      
+      .p-profile__tweet-container
+        .p-profile__tweet-list
+          - @tweets.each do |tweet|
+           li.c-tweet.p-home__tweet-item
+            .c-tweet__avatar
+              = image_tag tweet.user.avatar
+            .c-tweet__content
+              .c-tweet__name-wrap
+                span.c-tweet__display-name
+                  = tweet.user.display_name
+                span.c-tweet__account-name
+                  = tweet.user.account_name
+                span.c-tweet__created_at 
+                  = tweet.created_at.strftime("%Y年%m月%d日 %H:%M")
+              - if tweet.instance_of? Comment 
+                .c-tweet__reply
+                  | 返信先は
+                  = link_to tweet.user.display_name, tweet_path(tweet.id), class: 'c-tweet__reply-link'
+                  | さん
+              .c-tweet__text-wrap
+                = tweet.content
+
+        .p-profile__tweet-page
+          = paginate @tweets

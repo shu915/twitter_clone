@@ -1,0 +1,91 @@
+@use "../global/" as global;
+
+.p-home {
+
+}
+
+.p-home__sidebar {
+  width: 15rem;
+  border-right: 1px solid #eee;
+}
+
+.p-home__content {
+
+}
+
+
+.p-home__content {
+  flex: 0 1 100%;
+}
+
+.p-home__title {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.p-home__tab-list {
+  display: flex;
+  padding-bottom: 1rem;
+}
+
+.p-home__tab-item {
+  flex: 0 1 50%;
+  text-align: center;
+}
+
+.p-home__tab-link {
+  padding-bottom: 0.5rem;
+  
+  &:hover, &--active {
+    border-bottom: 3px solid global.$primary-color;
+
+  }
+
+}
+
+.p-home__form-wrap {
+  display: flex;
+  border-top: 1px solid #eee;
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.p-home__form-body {
+  flex: 0 1 100%;
+}
+
+.p-home__form-input {
+  border: none;
+  width: 100%;
+  padding: 0.5rem;
+  height: 8rem;
+  outline: none;
+  margin-left: 1rem;
+  resize: none;
+  font-size: 1.4rem;
+}
+
+.p-home__form-image {
+  width: 6rem;
+  border-radius: 50%;
+}
+
+.p-home_form-button {
+  width: 12rem;
+}
+
+.p-home__form-button-wrap {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.p-home__tweet-list {
+
+}
+
+.p-home__tweet-page {
+  padding-top: 2rem;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 5rem;
+}
