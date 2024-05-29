@@ -21,7 +21,8 @@ users.each do |user_data|
     u.password = user_data[:password]
     u.location = '東京都渋谷区'
     u.url = 'https://shu-web-creation.com'
-    u.self_intro = 'Webデザイナーの山田花子です。東京出身、28歳。ユーザー目線のデザインを心がけています。 旅行と写真撮影が趣味。インスピレーションを大切にしながら、これからも成長を続けていきます。よろしくお願いします！'
+    u.self_intro = 'Webデザイナーの山田花子です。東京出身、28歳。ユーザー目線のデザインを心がけています。
+                    旅行と写真撮影が趣味。インスピレーションを大切にしながら、これからも成長を続けていきます。よろしくお願いします！'
     u.skip_confirmation!
   end
 
