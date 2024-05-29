@@ -94,7 +94,7 @@
 .p-profile__tab-link {
   padding-bottom: 0.5rem;
   
-  &:hover {
+  &:hover, &--active {
     border-bottom: 3px solid global.$primary-color;
 
   }
