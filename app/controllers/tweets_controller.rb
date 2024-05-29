@@ -4,12 +4,11 @@ class TweetsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @user = current_user
     @tweet = Tweet.new
 
     if params[:following]
-      # following_user_ids = @user.includes().id
-      @tweets = Tweet.where(user_id: @user.following_users.pluck(:id))
+
+      @tweets = Tweet.where(user_id: current_user.followings.pluck(:id))
                      .includes(:user)
                      .order(created_at: :desc).page(params[:page]).per(10)
     else

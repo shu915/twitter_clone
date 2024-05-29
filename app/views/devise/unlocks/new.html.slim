@@ -1,5 +1,5 @@
 .p-devise__inner
-  h2
+  h2.p-devise__title
     | アカウントのロックを解除する
   = form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f|
     = render "devise/shared/error_messages", resource: resource
