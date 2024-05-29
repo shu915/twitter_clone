@@ -39,13 +39,13 @@ user2 = User.find_by(email: 'user2@example.com')
 
 user1.followings << user2
 
-tweet1 = Tweet.find(1)
-tweet2 = Tweet.find(15)
+tweet1 = Tweet.[0]
+tweet2 = Tweet.[15]
 
 user1.liked_tweets << [tweet1, tweet2]
 
-tweet3 = Tweet.find(2)
-tweet4 = Tweet.find(20)
+tweet3 = Tweet.[1]
+tweet4 = Tweet.[20]
 
 user1.retweeted_tweets << [tweet3, tweet4]
 
