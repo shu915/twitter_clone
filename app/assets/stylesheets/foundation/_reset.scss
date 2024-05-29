@@ -1,3 +1,5 @@
+@use "../global" as global;
+
 *,*::before,*::after {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -39,6 +41,10 @@ a {
   cursor: pointer;
   text-decoration: none;
   color: inherit;
+
+  &:hover {
+    color: global.$primary-color
+  }
 }
 
 input,

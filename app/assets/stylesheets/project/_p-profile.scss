@@ -1,0 +1,107 @@
+@use "../global" as global;
+
+.p-profile__content {
+  position: relative;
+}
+
+
+.p-profile__header {
+  width: 100%;
+  aspect-ratio: 5 / 1;
+  
+  & > img {
+    object-fit: cover;
+    height: 100%;
+  }
+}
+
+.p-profile__content
+
+.p-profile__avatar {
+  position: absolute;
+  width: 10rem;
+  height: 10rem;
+  top: -5rem;
+  left: 3rem;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+.p-profile__edit-button-wrap {
+  text-align: right;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  padding-right: 1rem;
+}
+
+.p-profile__display-name {
+  font-weight: bold;
+  margin-top: 1.5rem;
+}
+.p-profile__account-name {
+  font-size: 0.9rem;
+  color: #555;
+}
+.p-profile__self-intro {
+  margin-top: 1rem;
+
+}
+
+.p-profile__detail {
+  margin-top: 1rem;
+}
+
+.p-profile__location {
+
+}
+.p-profile__url {
+  margin-left: 1rem;
+  color: global.$primary-color;
+}
+.p-profile__birthday {
+  margin-left: 1rem;
+}
+.p-profile__created-at {
+
+}
+.p-profile__follow-wrap {
+  margin-top: 1rem;
+}
+.p-profile__followring {
+  font-weight: bold;
+}
+.p-profile__followed {
+  margin-left: 1rem;
+  font-weight: bold;
+}
+
+.p-profile__tab {
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.p-profile__tab-list {
+  display: flex;
+}
+
+.p-profile__tab-item {
+  width: 25%;
+  text-align: center;
+
+}
+
+.p-profile__tab-link {
+  padding-bottom: 0.5rem;
+  
+  &:hover {
+    border-bottom: 3px solid global.$primary-color;
+
+  }
+}
+
+.p-profile__tweet-page {
+  text-align: center;
+  margin-top: 2rem;
+  padding-bottom: 5rem;
+}

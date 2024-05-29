@@ -1,11 +1,6 @@
-@import 'bootstrap/scss/bootstrap';
-@import 'bootstrap-icons/font/bootstrap-icons';
-@import 'base.scss';
-@import 'reset.scss';
-@import 'p-application';
-@import 'p-devise';
-@import 'c-button';
-@import 'p-flash';
-@import 'p-header';
-@import 'l-inner';
-@import 'p-home';
+@use 'bootstrap/scss/bootstrap';
+@use 'bootstrap-icons/font/bootstrap-icons';
+@use 'foundation';
+@use 'layout';
+@use 'component';
+@use 'project';

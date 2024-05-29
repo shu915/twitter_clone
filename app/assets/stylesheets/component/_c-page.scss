@@ -1,0 +1,27 @@
+@use "../global" as global;
+
+.p-page {
+  display: flex;
+  gap: 0.3rem;
+  justify-content: center;
+}
+
+.p-page__item {
+  &.active > .p-page__link,
+  &:hover > .p-page__link {
+    background-color: global.$primary-color;
+    color: #fff;
+  }
+}
+
+.p-page__link {
+  height: 2.8rem;
+  padding-inline: 1rem;
+  line-height: 2.8rem;
+  text-align: center;
+  display: inline-block;
+  border: 1px solid global.$primary-color;
+  color: global.$primary-color;
+  border-radius: 0.2rem;
+ 
+}

@@ -1,0 +1,27 @@
+@use "../global" as global;
+.p-sidebar {
+  width: 15rem;
+  border-right: 1px solid #eee;
+  top: 5rem;
+  position: sticky;
+}
+
+
+.p-sidebar__item {
+  margin-top: 1.5rem;
+}
+
+.p-sidebar__link {
+font-size: 1.5rem;
+text-decoration: none;
+color: #333;
+font-style: none;
+
+&:hover {
+  color: global.$primary-color;
+}
+}
+
+.p-sidebar__icon {
+margin-right: 0.2rem;
+}

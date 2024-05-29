@@ -9,6 +9,9 @@
 #  birthday               :date             not null
 #  account_name           :string           not null
 #  display_name           :string           not null
+#  location               :string           default("非公開")
+#  url                    :string
+#  self_intro             :text
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  reset_password_token   :string
@@ -35,23 +38,33 @@ class User < ApplicationRecord
          :confirmable, :lockable, :timeoutable, :trackable, :omniauthable, omniauth_providers: %i[github]
   has_many :authorizations, dependent: :destroy
 
-  has_many :active_relationships, class_name: 'Follow', foreign_key: 'following_user_id', dependent: :destroy,
-                                  inverse_of: :following_user
-  has_many :following_users, through: :active_relationships, source: :followed_user
-  has_many :passive_relationships, class_name: 'Follow', foreign_key: 'followed_user_id', dependent: :destroy,
-                                   inverse_of: :followed_user
-  has_many :followed_users, through: :passive_relationships, source: :following_user
+  has_many :active_relationships, class_name: 'Follow', foreign_key: 'following_id', dependent: :destroy,
+                                  inverse_of: :following
+  has_many :followings, through: :active_relationships, source: :followed
+  has_many :passive_relationships, class_name: 'Follow', foreign_key: 'followed_id', dependent: :destroy,
+                                   inverse_of: :followed
+  has_many :followeds, through: :passive_relationships, source: :following
 
   has_many :tweets, dependent: :destroy
 
+  has_many :likes, dependent: :destroy
+  has_many :liked_tweets, through: :likes, source: :tweet
+
+  has_many :retweets, dependent: :destroy
+  has_many :retweeted_tweets, through: :retweets, source: :tweet
+
+  has_many :comments, dependent: :destroy
+
   has_one_attached :avatar
+  has_one_attached :header_image
 
   before_create :set_default_name
-  after_create :attach_default_avatar
 
   validates :tel, presence: true, length: { maximum: 20 }, numericality: { only_integer: true }
   validates :birthday, presence: true,
                        format: { with: /\A\d{4}-\d{1,2}-\d{1,2}\z/, message: 'は「YYYY-MM-DD」の形式で入力してください' }
+
+  after_create :attach_default_avatar_and_header
 
   def self.from_omniauth(auth)
     user = where(email: auth.info.email).first
@@ -73,10 +86,11 @@ class User < ApplicationRecord
     self.display_name = random_name
   end
 
-  def attach_default_avatar
-    return if avatar.attached?
+  def attach_default_avatar_and_header
+    avatar.attach(io: File.open(Rails.root.join('app/assets/images/default_avatar.webp')),
+                  filename: 'default_avatar.webp', content_type: 'image/webp')
 
-    avatar.attach(io: File.open(Rails.root.join('app/assets/images/default_profile.png')),
-                  filename: 'default_profile.png', content_type: 'image/png')
+    header_image.attach(io: File.open(Rails.root.join('app/assets/images/default_header.webp')),
+                        filename: 'default_header.webp', content_type: 'image/webp')
   end
 end
