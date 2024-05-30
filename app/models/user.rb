@@ -58,8 +58,6 @@ class User < ApplicationRecord
   has_one_attached :avatar
   has_one_attached :header_image
 
-  before_create :set_default_name
-
   validates :tel, presence: true, length: { maximum: 20 }, numericality: { only_integer: true }
   validates :birthday, presence: true,
                        format: { with: /\A\d{4}-\d{1,2}-\d{1,2}\z/, message: 'は「YYYY-MM-DD」の形式で入力してください' }
@@ -67,7 +65,8 @@ class User < ApplicationRecord
   validates :account_name, presence: true, uniqueness: true, length: { maximum: 20 }
   validates :display_name, presence: true, length: { maximum: 20 }
   validates :location, length: { maximum: 25 }
-  validates :url, length: { maximum: 255 }, format: { with: %r{\A(https?://)}i, message: 'は有効ではありません' }
+  validates :url, length: { maximum: 255 },
+                  format: { with: %r{\A(https?://)}i, message: 'は有効ではありません', allow_blank: true }
   validates :self_intro, length: { maximum: 500 }
 
   validates :avatar, content_type: { in: %i[png jpg jpeg webp], message: 'はpng, jpeg, jpg, webpのいずれかにしてください' },
@@ -89,13 +88,6 @@ class User < ApplicationRecord
   end
 
   private
-
-  def set_default_name
-    random_string = SecureRandom.alphanumeric(16)
-    random_name = random_string
-    self.account_name = random_name
-    self.display_name = random_name
-  end
 
   def attach_default_avatar_and_header
     avatar.attach(io: File.open(Rails.root.join('app/assets/images/default_avatar.webp')),

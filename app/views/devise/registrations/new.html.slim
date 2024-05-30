@@ -8,6 +8,12 @@
       = f.label :email, class: 'p-devise__form-label'
       = f.email_field :email, autofocus: true, autocomplete: "Eメール(必須)", class: 'p-devise__form-input', placeholder: 'exmaple@exmaple.com'
     .p-devise__form-group
+      = f.label :account_name, 'アカウントネーム', class: 'p-devise__form-label'
+      = f.text_field :account_name, class: 'p-devise__form-input', placeholder: 'bob1234'
+    .p-devise__form-group
+      = f.label :display_name, 'ディスプレイネーム', class: 'p-devise__form-label'
+      = f.text_field :display_name, class: 'p-devise__form-input', placeholder: 'ボブ'
+    .p-devise__form-group
       = f.label :tel, '電話番号(必須)', class: 'p-devise__form-label'
       = f.text_field :tel, class: 'p-devise__form-input', placeholder: '07011112222'
     .p-devise__form-group
