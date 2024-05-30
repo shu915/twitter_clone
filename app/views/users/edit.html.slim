@@ -1,0 +1,104 @@
+  .l-inner.p-main__inner
+    .p-main__sidebar
+      = render partial: 'shared/sidebar'
+
+    .p-profile
+      
+      .p-profile__header
+        = image_tag @user.header_image, alt: 'プロフィールのヘッダーイメージ'
+      .p-profile__content
+        .p-profile__avatar 
+          = image_tag @user.avatar, alt: 'プロフィール画像'
+        .p-profile__edit-button-wrap 
+        .p-profile__display-name
+          = @user.display_name
+        .p-profile__account-name
+          |@
+          = @user.account_name
+        .p-profile__self-intro
+          = sanitize(simple_format(@user.self_intro))
+        .p-profile__detail
+          span.p-profile__location
+            i.bi.bi-geo-alt-fill
+            = @user.location
+          - if @user.url?
+            span.p-profile__url
+             i.bi.bi-link-45deg
+             = link_to @user.url, @user.url
+          span.p-profile__birthday
+            i.bi.bi-balloon 
+            | 誕生日:
+            = @user.birthday
+        .p-profile__created-at
+          i.bi.bi-calendar-check
+          = @user.created_at.strftime('%Y年%m月')
+          | からtwiiterを利用しています
+        
+        .p-profile__follow-wrap
+          span.p-profile__followring
+            = @user.followings.count
+            |  フォロー中
+          span.p-profile__followed
+            = @user.followeds.count
+            |  フォロワー
+      
+      = form_with model: @user, class: 'p-profile__form' do |f|
+        h2.p-profile__form-title プロフィールを編集する
+        .p-profile__form-group
+          = f.label :account_name, 'アカウントネーム(必須)', class: 'p-profile__form-label'
+          = f.text_field :account_name, class: 'p-profile__form-input'
+          - if @user.errors[:account_name].any?
+            span.p-profile__form-error
+             = @user.errors.full_message(:account_name, @user.errors[:account_name].first)
+
+        .p-profile__form-group
+          = f.label :display_name, 'ディスプレーネーム(必須)', class: 'p-profile__form-label'
+          = f.text_field :display_name, class: 'p-profile__form-input'
+          - if @user.errors[:display_name].any?
+            span.p-profile__form-error
+             = @user.errors.full_message(:display_name, @user.errors[:display_name].first)
+
+        .p-profile__form-group
+          = f.label :tel, '電話番号(必須)', class: 'p-profile__form-label'
+          = f.text_field :tel, class: 'p-profile__form-input', placeholder: '07011112222'
+          - if @user.errors[:tel].any?
+            span.p-profile__form-error
+              = @user.errors.full_message(:tel, @user.errors[:tel].first)
+        
+        .p-profile__form-group
+          = f.label :location, 'ロケーション', class: 'p-profile__form-label'
+          = f.text_field :location, class: 'p-profile__form-input'
+          - if @user.errors[:location].any?
+            span.p-profile__form-error
+              = @user.errors.full_message(:location, @user.errors[:location].first)
+
+        .p-profile__form-group
+          = f.label :url, 'url', class: 'p-profile__form-label'
+          = f.text_field :url, class: 'p-profile__form-input'
+          - if @user.errors[:url].any?
+            span.p-profile__form-error
+              = @user.errors.full_message(:url, @user.errors[:url].first)
+
+        .p-profile__form-group
+          = f.label :self_intro, '自己紹介', class: 'p-profile__form-label'
+          = f.text_area :self_intro, class: 'p-profile__form-area'
+          - if @user.errors[:self_intro].any?
+            span.p-profile__form-error
+              = @user.errors.full_message(:self_intro, @user.errors[:self_intro].first)
+
+        .p-profile__form-group
+          = f.label :avatar, 'プロフィール画像', class: 'p-profile__form-label'
+          = f.file_field :avatar, class: 'p-profile__form-input'
+          - if @user.errors[:avatar].any?
+            span.p-profile__form-error
+              = @user.errors.full_message(:avatar, @user.errors[:avatar].first)
+
+        .p-profile__form-group
+          = f.label :header_image, 'ヘッダー画像', class: 'p-profile__form-label'
+          = f.file_field :header_image, class: 'p-profile__form-input'
+          - if @user.errors[:header_image].any?
+            span.p-profile__form-error
+              = @user.errors.full_message(:header_image, @user.errors[:header_image].first)
+
+        .p-profile__form-actions
+          = f.submit "登録する" ,class: 'c-button p-profile__button'

@@ -64,6 +64,17 @@ class User < ApplicationRecord
   validates :birthday, presence: true,
                        format: { with: /\A\d{4}-\d{1,2}-\d{1,2}\z/, message: 'は「YYYY-MM-DD」の形式で入力してください' }
 
+  validates :account_name, presence: true, uniqueness: true, length: { maximum: 20 }
+  validates :display_name, presence: true, length: { maximum: 20 }
+  validates :location, length: { maximum: 25 }
+  validates :url, length: { maximum: 255 }, format: { with: %r{\A(https?://)}i, message: 'は有効ではありません' }
+  validates :self_intro, length: { maximum: 500 }
+
+  validates :avatar, content_type: { in: %i[png jpg jpeg webp], message: 'はpng, jpeg, jpg, webpのいずれかにしてください' },
+                     size: { less_than: 5.megabytes }
+  validates :header_image, content_type: { in: %i[png jpg jpeg webp], message: 'はpng, jpeg, jpg, webpのいずれかにしてください' },
+                           size: { less_than: 5.megabytes }
+
   after_create :attach_default_avatar_and_header
 
   def self.from_omniauth(auth)
@@ -81,7 +92,7 @@ class User < ApplicationRecord
 
   def set_default_name
     random_string = SecureRandom.alphanumeric(16)
-    random_name = "@#{random_string}"
+    random_name = random_string
     self.account_name = random_name
     self.display_name = random_name
   end

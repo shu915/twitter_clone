@@ -1,4 +1,8 @@
 @use "../global" as global;
+.p-profile {
+  padding-bottom: 10rem;
+}
+
 
 .p-profile__content {
   position: relative;
@@ -15,7 +19,9 @@
   }
 }
 
-.p-profile__content
+.p-profile__content {
+
+}
 
 .p-profile__avatar {
   position: absolute;
@@ -29,10 +35,11 @@
 
 .p-profile__edit-button-wrap {
   text-align: right;
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
   padding-right: 1rem;
+  height: 4rem;
+  padding-top: 1.5rem;
 }
+
 
 .p-profile__display-name {
   font-weight: bold;
@@ -103,5 +110,51 @@
 .p-profile__tweet-page {
   text-align: center;
   margin-top: 2rem;
-  padding-bottom: 5rem;
+}
+
+.p-profile__form {
+  width: 40rem;
+  // max-width: 98%;
+  margin-inline: auto;
+}
+
+.p-profile__form-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: 3rem;
+}
+
+.p-profile__form-label {
+  color: #333;
+}
+
+.p-profile__form-error {
+  font-size: 0.9rem;
+  color: red;
+}
+
+.p-profile__form-group {
+  margin-top: 1rem;
+}
+
+.p-profile__form-input,
+.p-profile__form-area {
+  width: 100%;
+  padding: 0.4rem;
+  margin-top: 0.2rem;
+}
+
+.p-profile__form-area {
+  height: 10rem;
+  resize: none;
+}
+
+
+
+.p-profile__form-actions {
+  margin-top: 1rem;
+}
+
+.p-profile__form-button {
+  margin-top: 1rem;
 }
