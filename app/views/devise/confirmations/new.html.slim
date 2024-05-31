@@ -2,10 +2,10 @@
   h2.p-devise__title
     | 登録用メールを再送する
   = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
-    = render "devise/shared/error_messages", resource: resource
-    .p-devise__form-field
+    .p-devise__form-group
       = f.label :email, class: 'p-devise__form-label'
-    = f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: 'p-devise__form-input'
+      = f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: 'p-devise__form-input',placeholder: 'user1@example.com'
+      = render partial: 'shared/validation_error', locals: { object: resource, field: :email }
     .p-devise__form-actions
       = f.submit "メールを再送する", class: 'c-button p-devise__form-button'
   = render "devise/shared/links"

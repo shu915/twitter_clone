@@ -14,6 +14,9 @@ ja:
         self_intro: '自己紹介'
         avatar: 'プロフィール画像'
         header_image: 'ヘッダー画像'
+      tweet:
+        content: 'ツイート'
+        tweet_image: 'ツイート画像'
       models:
         user: "ユーザー"
 
