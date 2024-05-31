@@ -6,12 +6,17 @@ ja:
         password: "パスワード"
         password_confirmation: "パスワード（確認用）"
         remember_me: "ログインを記憶"
-        tel: 電話番号
-        birthday: 誕生日
-    models:
-      user: ユーザー
-      email: メールアドレス
-      Password: パスワード
+        tel: "電話番号"
+        birthday: "誕生日"
+        account_name: 'アカウントネーム'
+        display_name: 'ディスプレイネーム'
+        url: 'URL'
+        self_intro: '自己紹介'
+        avatar: 'プロフィール画像'
+        header_image: 'ヘッダー画像'
+      models:
+        user: "ユーザー"
+
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'

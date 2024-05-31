@@ -9,21 +9,28 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 users = [
-  { email: 'user1@example.com', tel: '1234567890', birthday: '2000-01-01', password: 'password1' },
-  { email: 'user2@example.com', tel: '9876543210', birthday: '2000-02-02', password: 'password2' },
-  { email: 'user3@example.com', tel: '5555555555', birthday: '2000-03-03', password: 'password3' }
+  { account_name: 'user1', display_name: 'user1', email: 'user1@example.com',
+    tel: '1234567890', birthday: '2000-01-01', password: 'password1' },
+  { account_name: 'user2', display_name: 'user2', email: 'user2@example.com',
+    tel: '9876543210', birthday: '2000-02-02', password: 'password2' },
+  { account_name: 'user3', display_name: 'user3', email: 'user3@example.com',
+    tel: '5555555555', birthday: '2000-03-03', password: 'password3' }
 ]
 
 users.each do |user_data|
   user = User.find_or_create_by(email: user_data[:email]) do |u|
+    u.account_name = user_data[:account_name]
+    u.display_name = user_data[:display_name]
     u.tel = user_data[:tel]
     u.birthday = user_data[:birthday]
     u.password = user_data[:password]
     u.location = '東京都渋谷区'
     u.url = 'https://shu-web-creation.com'
-    u.self_intro = 'Webデザイナーの山田花子です。東京出身、28歳。ユーザー目線のデザインを心がけています。
-                    旅行と写真撮影が趣味。インスピレーションを大切にしながら、これからも成長を続けていきます。よろしくお願いします！'
+    u.self_intro =
+      'Webデザイナーの山田花子です。東京出身、28歳。ユーザー目線のデザインを心がけています。
+    旅行と写真撮影が趣味。インスピレーションを大切にしながら、これからも成長を続けていきます。よろしくお願いします！'
     u.skip_confirmation!
+    u.save!
   end
 
   # ユーザーごとにツイートを作成
