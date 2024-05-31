@@ -1,0 +1,3 @@
+- if @user.errors[field].any?
+  span.p-profile__form-error
+    = @user.errors.full_message(field, @user.errors[field].first)
