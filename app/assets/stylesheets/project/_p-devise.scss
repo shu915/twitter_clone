@@ -1,3 +1,5 @@
+@use '../global/' as global;
+
 .p-devise__title {
   color: #333;
   font-size: 1.5rem;
@@ -35,6 +37,10 @@
 }
 .p-devise__form-group {
   margin-top: 1rem;
+
+  &--check {
+    position: relative;
+  }
 }
 
 .p-devise__form-input {
@@ -43,6 +49,47 @@
   margin-top: 0.2rem;
 }
 
+.p-devise__form-check {
+  position: absolute;
+  height: 0;
+  width: 0;
+  opacity: 0;
+
+  & + .p-devise__form-label {
+    position: relative;
+    padding-left: 30px;
+   cursor: pointer;
+}
+
+  & + .p-devise__form-label:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #333;
+    background-color: #fff;
+}
+
+  &:checked + .p-devise__form-label:before {
+    background-color: global.$primary-color;
+    border-color: global.$primary-color;
+}
+
+&:checked + .p-devise__form-label:after {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 3px;
+  width: 6px;
+  height: 12px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+}
 .p-devise__form-actions {
   margin-top: 1rem;
 }

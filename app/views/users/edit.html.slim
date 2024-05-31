@@ -47,58 +47,43 @@
         .p-profile__form-group
           = f.label :account_name, 'アカウントネーム(必須)', class: 'p-profile__form-label'
           = f.text_field :account_name, class: 'p-profile__form-input'
-          - if @user.errors[:account_name].any?
-            span.p-profile__form-error
-             = @user.errors.full_message(:account_name, @user.errors[:account_name].first)
+          = render partial: 'shared/validation_error', locals: { field: :account_name }
 
         .p-profile__form-group
           = f.label :display_name, 'ディスプレーネーム(必須)', class: 'p-profile__form-label'
           = f.text_field :display_name, class: 'p-profile__form-input'
-          - if @user.errors[:display_name].any?
-            span.p-profile__form-error
-             = @user.errors.full_message(:display_name, @user.errors[:display_name].first)
+          = render partial: 'shared/validation_error', locals: { field: :display_name }
 
         .p-profile__form-group
           = f.label :tel, '電話番号(必須)', class: 'p-profile__form-label'
           = f.text_field :tel, class: 'p-profile__form-input', placeholder: '07011112222'
-          - if @user.errors[:tel].any?
-            span.p-profile__form-error
-              = @user.errors.full_message(:tel, @user.errors[:tel].first)
+          = render partial: 'shared/validation_error', locals: { field: :tel }
         
         .p-profile__form-group
           = f.label :location, 'ロケーション', class: 'p-profile__form-label'
           = f.text_field :location, class: 'p-profile__form-input'
-          - if @user.errors[:location].any?
-            span.p-profile__form-error
-              = @user.errors.full_message(:location, @user.errors[:location].first)
+          = render partial: 'shared/validation_error', locals: { field: :location }
 
         .p-profile__form-group
           = f.label :url, 'url', class: 'p-profile__form-label'
           = f.text_field :url, class: 'p-profile__form-input'
-          - if @user.errors[:url].any?
-            span.p-profile__form-error
-              = @user.errors.full_message(:url, @user.errors[:url].first)
+          = render partial: 'shared/validation_error', locals: { field: :url }
 
         .p-profile__form-group
           = f.label :self_intro, '自己紹介', class: 'p-profile__form-label'
           = f.text_area :self_intro, class: 'p-profile__form-area'
-          - if @user.errors[:self_intro].any?
-            span.p-profile__form-error
-              = @user.errors.full_message(:self_intro, @user.errors[:self_intro].first)
+          = render partial: 'shared/validation_error', locals: { field: :self_intro }
 
         .p-profile__form-group
           = f.label :avatar, 'プロフィール画像', class: 'p-profile__form-label'
           = f.file_field :avatar, class: 'p-profile__form-input'
-          - if @user.errors[:avatar].any?
-            span.p-profile__form-error
-              = @user.errors.full_message(:avatar, @user.errors[:avatar].first)
+          = render partial: 'shared/validation_error', locals: { field: :avatar }
+          
 
         .p-profile__form-group
           = f.label :header_image, 'ヘッダー画像', class: 'p-profile__form-label'
           = f.file_field :header_image, class: 'p-profile__form-input'
-          - if @user.errors[:header_image].any?
-            span.p-profile__form-error
-              = @user.errors.full_message(:header_image, @user.errors[:header_image].first)
+          = render partial: 'shared/validation_error', locals: { field: :header_image }
 
         .p-profile__form-actions
           = f.submit "登録する" ,class: 'c-button p-profile__button'
