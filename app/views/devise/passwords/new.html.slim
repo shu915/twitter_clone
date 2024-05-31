@@ -5,7 +5,7 @@
     .p-devise__form-group
       = f.label :email, class: 'p-devise__form-label'
       = f.email_field :email, autofocus: true, autocomplete: "email", class: 'p-devise__form-input', placeholder: 'user1@example.com'
-      = render partial: 'shared/validation_error', locals: { field: :email }
+      = render partial: 'shared/validation_error', locals: { object: resource , field: :email }
     .p-devise__form-actions
       = f.submit "パスワードをリセット", class: 'c-button p-devise__form-button'
   = render "devise/shared/links"
