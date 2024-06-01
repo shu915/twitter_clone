@@ -25,5 +25,5 @@ class Tweet < ApplicationRecord
 
   validates :content, presence: true, length: { maximum: 140 }
   validates :image, content_type: { in: %i[png jpg jpeg webp], message: 'はpng, jpeg, jpg, webpのいずれかにしてください' },
-                          size: { less_than: 5.megabytes }
+                    size: { less_than: 5.megabytes }
 end
