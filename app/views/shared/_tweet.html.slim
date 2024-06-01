@@ -18,6 +18,6 @@ li.c-tweet.p-home__tweet-item
     .c-tweet__text-wrap
       = tweet.content
     - unless tweet.instance_of? Comment     
-      - if  tweet.tweet_image.attached?
+      - if  tweet.image.attached?
         .c-tweet__image
-         = image_tag tweet.tweet_image
+         = image_tag tweet.image
