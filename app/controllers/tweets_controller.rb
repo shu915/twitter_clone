@@ -21,8 +21,8 @@ class TweetsController < ApplicationController
 
   def create
     @tweets = Tweet.includes(:user,
-                                       user: [avatar_attachment: :blob]).order(created_at: :desc)
-                             .page(params[:page]).per(10)
+                             user: [avatar_attachment: :blob]).order(created_at: :desc)
+                   .page(params[:page]).per(10)
     @tweet = current_user.tweets.build(tweet_params)
     if @tweet.save
       flash[:notice] = 'ツイートを投稿しました。'
