@@ -19,30 +19,23 @@
           = image_tag current_user.avatar
 
         = form_with model: @tweet, class: 'p-home__form-body' do |f|
-          = f.text_area :content, class: 'p-home__form-input', placeholder: 'いまどうしている？'
+          = f.text_area :content, class: 'p-home__form-area', placeholder: 'いまどうしている？'
+          = render partial: 'shared/validation_error', locals: { object: @tweet ,field: :content }
 
           .p-home__form-button-wrap
-           = f.submit 'ツイートする', class: 'c-button p-home_form-button'
+            .p-home__form-group
+              = f.label :image, '画像をアップロード', class: 'p-home_from-label'
+              = f.file_field :image, class: 'p-home__form-input', label: '画像を選択'
+              = render partial: 'shared/validation_error', locals: { object: @tweet ,field: :image }
+
+            = f.submit 'ツイートする', class: 'c-button p-home_form-button'
 
 
 
           
       ul.p-home__tweet-list
         - @tweets.each do |tweet|
-         li.c-tweet.p-home__tweet-item
-          .c-tweet__avatar
-            = image_tag tweet.user.avatar
-          .c-tweet__content
-            .c-tweet__name-wrap
-              span.c-tweet__display-name
-                = tweet.user.display_name
-              span.c-tweet__account-name
-                |@
-                = tweet.user.account_name
-              span.c-tweet__created_at 
-                = tweet.created_at.strftime("%Y年%m月%d日 %H:%M")
-            .c-tweet__text-wrap
-              = tweet.content
+         = render partial: 'shared/tweet', locals: { tweet: tweet }
 
       .p-home__tweet-page
         = paginate @tweets

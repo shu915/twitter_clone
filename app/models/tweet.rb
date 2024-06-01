@@ -20,4 +20,10 @@ class Tweet < ApplicationRecord
   has_many :retweeted_user, through: :retweets, source: :user
 
   has_many :comments, dependent: :destroy
+
+  has_one_attached :image
+
+  validates :content, presence: true, length: { maximum: 140 }
+  validates :image, content_type: { in: %i[png jpg jpeg webp], message: 'はpng, jpeg, jpg, webpのいずれかにしてください' },
+                    size: { less_than: 5.megabytes }
 end

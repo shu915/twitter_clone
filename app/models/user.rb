@@ -75,7 +75,6 @@ class User < ApplicationRecord
                            size: { less_than: 5.megabytes }
 
   after_create :attach_default_avatar_and_header
-  before_validation :set_default_name
 
   def self.from_omniauth(auth)
     user = where(email: auth.info.email).first
@@ -96,11 +95,5 @@ class User < ApplicationRecord
 
     header_image.attach(io: File.open(Rails.root.join('app/assets/images/default_header.webp')),
                         filename: 'default_header.webp', content_type: 'image/webp')
-  end
-
-  def set_default_name
-    random_name = SecureRandom.alphanumeric(10)
-    self.account_name = random_name
-    self.display_name = random_name
   end
 end

@@ -47,43 +47,43 @@
         .p-profile__form-group
           = f.label :account_name, 'アカウントネーム(必須)', class: 'p-profile__form-label'
           = f.text_field :account_name, class: 'p-profile__form-input'
-          = render partial: 'shared/validation_error', locals: { field: :account_name }
+          = render partial: 'shared/validation_error', locals: { object: @user ,field: :account_name }
 
         .p-profile__form-group
           = f.label :display_name, 'ディスプレーネーム(必須)', class: 'p-profile__form-label'
           = f.text_field :display_name, class: 'p-profile__form-input'
-          = render partial: 'shared/validation_error', locals: { field: :display_name }
+          = render partial: 'shared/validation_error', locals: { object: @user ,field: :display_name }
 
         .p-profile__form-group
           = f.label :tel, '電話番号(必須)', class: 'p-profile__form-label'
           = f.text_field :tel, class: 'p-profile__form-input', placeholder: '07011112222'
-          = render partial: 'shared/validation_error', locals: { field: :tel }
+          = render partial: 'shared/validation_error', locals: { object: @user ,field: :tel }
         
         .p-profile__form-group
           = f.label :location, 'ロケーション', class: 'p-profile__form-label'
           = f.text_field :location, class: 'p-profile__form-input'
-          = render partial: 'shared/validation_error', locals: { field: :location }
+          = render partial: 'shared/validation_error', locals: { object: @user ,field: :location }
 
         .p-profile__form-group
           = f.label :url, 'url', class: 'p-profile__form-label'
           = f.text_field :url, class: 'p-profile__form-input'
-          = render partial: 'shared/validation_error', locals: { field: :url }
+          = render partial: 'shared/validation_error', locals: { object: @user ,field: :url }
 
         .p-profile__form-group
           = f.label :self_intro, '自己紹介', class: 'p-profile__form-label'
           = f.text_area :self_intro, class: 'p-profile__form-area'
-          = render partial: 'shared/validation_error', locals: { field: :self_intro }
+          = render partial: 'shared/validation_error', locals: { object: @user ,field: :self_intro }
 
         .p-profile__form-group
           = f.label :avatar, 'プロフィール画像', class: 'p-profile__form-label'
           = f.file_field :avatar, class: 'p-profile__form-input'
-          = render partial: 'shared/validation_error', locals: { field: :avatar }
+          = render partial: 'shared/validation_error', locals: { object: @user ,field: :avatar }
           
 
         .p-profile__form-group
           = f.label :header_image, 'ヘッダー画像', class: 'p-profile__form-label'
           = f.file_field :header_image, class: 'p-profile__form-input'
-          = render partial: 'shared/validation_error', locals: { field: :header_image }
+          = render partial: 'shared/validation_error', locals: { object: @user ,field: :header_image }
 
         .p-profile__form-actions
           = f.submit "登録する" ,class: 'c-button p-profile__button'
