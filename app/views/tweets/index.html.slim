@@ -24,9 +24,9 @@
 
           .p-home__form-button-wrap
             .p-home__form-group
-              = f.label :tweet_image, '画像をアップロード', class: 'p-home_from-label'
-              = f.file_field :tweet_image, class: 'p-home__form-input', label: '画像を選択'
-              = render partial: 'shared/validation_error', locals: { object: @tweet ,field: :tweet_image }
+              = f.label :image, '画像をアップロード', class: 'p-home_from-label'
+              = f.file_field :image, class: 'p-home__form-input', label: '画像を選択'
+              = render partial: 'shared/validation_error', locals: { object: @tweet ,field: :image }
 
             = f.submit 'ツイートする', class: 'c-button p-home_form-button'
 

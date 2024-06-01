@@ -9,10 +9,10 @@ class TweetsController < ApplicationController
     if params[:following]
 
       @tweets = Tweet.where(user_id: current_user.followings.pluck(:id))
-                     .includes(tweet_image_attachment: :blob, user: { avatar_attachment: :blob })
+                     .includes(image_attachment: :blob, user: { avatar_attachment: :blob })
                      .order(created_at: :desc).page(params[:page]).per(10)
     else
-      @tweets = Tweet.includes(tweet_image_attachment: :blob,
+      @tweets = Tweet.includes(image_attachment: :blob,
                                user: { avatar_attachment: :blob }).order(created_at: :desc).page(params[:page]).per(10)
     end
   end
@@ -20,7 +20,7 @@ class TweetsController < ApplicationController
   def show; end
 
   def create
-    @tweets = @tweets = Tweet.includes(:user,
+    @tweets = Tweet.includes(:user,
                                        user: [avatar_attachment: :blob]).order(created_at: :desc)
                              .page(params[:page]).per(10)
     @tweet = current_user.tweets.build(tweet_params)
@@ -35,6 +35,6 @@ class TweetsController < ApplicationController
   private
 
   def tweet_params
-    params.require(:tweet).permit(:content, :tweet_image)
+    params.require(:tweet).permit(:content, :image)
   end
 end

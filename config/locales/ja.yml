@@ -16,7 +16,7 @@ ja:
         header_image: 'ヘッダー画像'
       tweet:
         content: 'ツイート'
-        tweet_image: 'ツイート画像'
+        image: 'ツイート画像'
       models:
         user: "ユーザー"
 

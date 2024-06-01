@@ -8,17 +8,17 @@ class UsersController < ApplicationController
   def show
     @tweets = case params[:tab]
               when 'like'
-                @user.liked_tweets.includes(:tweet_image_attachment,
+                @user.liked_tweets.includes(:image_attachment,
                                             user: { avatar_attachment: :blob }).order(created_at: :desc)
                      .page(params[:page]).per(10)
               when 'retweet'
-                @user.retweeted_tweets.includes(:tweet_image_attachment,
+                @user.retweeted_tweets.includes(:image_attachment,
                                                 user: { avatar_attachment: :blob }).order(created_at: :desc)
                      .page(params[:page]).per(10)
               when 'comment'
                 @user.comments.order(created_at: :desc).page(params[:page]).per(10)
               else
-                @user.tweets.includes(tweet_image_attachment: :blob)
+                @user.tweets.includes(image_attachment: :blob)
                      .order(created_at: :desc).page(params[:page]).per(10)
               end
   end
