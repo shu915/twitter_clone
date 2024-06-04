@@ -1,9 +1,15 @@
 @use "../global" as global;
 
 .c-tweet {
+}
+.c-tweet__link {
+  
   display: flex;
   padding: 1rem;
   border-bottom: 1px solid #eee;
+  &:hover {
+    color: #333;
+  }
 }
 
 .c-tweet__avatar {

@@ -16,7 +16,7 @@ class UsersController < ApplicationController
                                                 user: { avatar_attachment: :blob }).order(created_at: :desc)
                      .page(params[:page]).per(10)
               when 'comment'
-                @user.comments.order(created_at: :desc).page(params[:page]).per(10)
+                @user.comments.includes(image_attachment: :blob).order(created_at: :desc).page(params[:page]).per(10)
               else
                 @user.tweets.includes(image_attachment: :blob)
                      .order(created_at: :desc).page(params[:page]).per(10)

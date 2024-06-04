@@ -1,0 +1,29 @@
+.l-inner
+  = render partial: 'shared/sidebar'
+
+  .p-tweet-detail__content
+    h2.p-tweet-detail__title ツイート
+
+    = render partial: 'shared/tweet_link', locals: { tweet: @tweet}
+
+    .p-tweet-detail__comment-container
+      .p-tweet-detail__comment-avatar 
+        = image_tag current_user.avatar
+      = form_with model: [@tweet, @comment] , class: 'p-tweet-detail__comment-form' do |form|
+        = form.text_area :content, class: 'p-tweet-detail__comment-area', placeholder: '返信をツイート'
+        = render partial: 'shared/validation_error', locals: { object: @comment ,field: :content }
+
+        .p-tweet-detail__comment-footer
+          .p-tweet_detail__comment-form-group
+            = form.label :image, '画像を選択', class: 'p-tweet-detail__comment-label'
+            = form.file_field :image, class: 'p-tweet_detail__comment-input'
+            = render partial: 'shared/validation_error', locals: { object: @comment ,field: :image }
+
+          = form.submit '返信', class: 'c-button p-tweet-detail__comment-button'
+    
+    .p-tweet-detail__comment-list
+      - @comments.each do | comment |
+        = render partial: 'shared/tweet_link', locals: { tweet: comment }
+
+    .p-tweet-detail__page
+        = paginate @comments

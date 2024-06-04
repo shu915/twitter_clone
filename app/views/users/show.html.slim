@@ -1,6 +1,5 @@
-  .l-inner.p-main__inner
-    .p-main__sidebar
-      = render partial: 'shared/sidebar'
+  .l-inner
+    = render partial: 'shared/sidebar'
 
     .p-profile
       
@@ -66,7 +65,7 @@
       .p-profile__tweet-container
         .p-profile__tweet-list
           - @tweets.each do |tweet|
-           = render partial: 'shared/tweet', locals: { tweet: tweet }
+            = render partial: 'shared/tweet_link', locals: { tweet: tweet}
 
         .p-profile__tweet-page
           = paginate @tweets
