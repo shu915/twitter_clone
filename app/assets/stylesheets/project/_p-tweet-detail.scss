@@ -1,0 +1,57 @@
+.p-tweet-detail__title {
+  font-size: 1.5rem;
+  text-align: center;
+  padding-top: 1rem;
+}
+
+.p-tweet-detail__content {
+  padding-top: 1rem;
+  width: 100%;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1rem;
+}
+
+.p-tweet-detail__comment-container {
+  display: flex;
+  padding-left: 1rem;
+  padding-top: 1rem;
+}
+.p-tweet-detail__comment-avatar {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+}
+
+.p-tweet-detail__comment-form {
+  margin-left: 1rem;
+  width: 100%;
+}
+
+.p-tweet-detail__comment-area {
+  resize: none;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  width: calc(100% - 7rem);
+  height: 5rem;
+}
+
+.p-tweet-detail__comment-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.p-tweet_detail__comment-form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.p-tweet-detail__comment-button {
+  width: 7rem;
+}
+
+.p-tweet-detail__page {
+  text-align: center;
+  margin-top: 2rem;
+}

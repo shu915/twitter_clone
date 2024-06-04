@@ -6,6 +6,7 @@
 
 .p-profile__content {
   position: relative;
+  padding-left: 1rem;
 }
 
 
@@ -17,10 +18,6 @@
     object-fit: cover;
     height: 100%;
   }
-}
-
-.p-profile__content {
-
 }
 
 .p-profile__avatar {
@@ -114,7 +111,6 @@
 
 .p-profile__form {
   width: 40rem;
-  // max-width: 98%;
   margin-inline: auto;
 }
 
