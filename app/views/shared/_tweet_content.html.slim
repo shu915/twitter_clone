@@ -1,0 +1,21 @@
+.c-tweet__avatar
+  = image_tag tweet.user.avatar
+.c-tweet__content
+  .c-tweet__name-wrap
+    span.c-tweet__display-name
+      = tweet.user.display_name
+    span.c-tweet__account-name
+      |@
+      = tweet.user.account_name
+    span.c-tweet__created_at 
+      = tweet.created_at.strftime("%Y年%m月%d日 %H:%M")
+      - if tweet.instance_of? Comment 
+        .c-tweet__reply
+          | 返信先は@
+          = link_to tweet.user.account_name, tweet_path(tweet.tweet_id), class: 'c-tweet__reply-link'
+          | さん
+  .c-tweet__text-wrap
+    = tweet.content
+    - if  tweet.image.attached?
+      .c-tweet__image
+        = image_tag tweet.image

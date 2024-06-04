@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   # end
 
   root 'tweets#index'
-  resources :tweets
+  resources :tweets, only: %i[index show create] do
+    resources :comments, only: %i[create]
+  end
 
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 end

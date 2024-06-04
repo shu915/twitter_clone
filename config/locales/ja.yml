@@ -17,8 +17,13 @@ ja:
       tweet:
         content: 'ツイート'
         image: 'ツイート画像'
+      comment:
+        content: '返信内容'
+        image: '返信画像'
       models:
         user: "ユーザー"
+
+      
 
     errors:
       messages:

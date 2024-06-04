@@ -1,6 +1,5 @@
-  .l-inner.p-main__inner
-    .p-main__sidebar
-      = render partial: 'shared/sidebar'
+  .l-inner
+    = render partial: 'shared/sidebar'
 
     .p-home__content
       h2.p-home__title ホーム
@@ -35,7 +34,7 @@
           
       ul.p-home__tweet-list
         - @tweets.each do |tweet|
-         = render partial: 'shared/tweet', locals: { tweet: tweet }
+          = render partial: 'shared/tweet_link', locals: { tweet: tweet}
 
       .p-home__tweet-page
         = paginate @tweets
