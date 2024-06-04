@@ -1,0 +1,7 @@
+li.c-tweet
+  - if tweet.instance_of? Comment
+    .c-tweet__link
+      = render partial: 'shared/tweet_content' ,locals: { tweet: tweet }
+  - else
+    = link_to tweet_path(tweet), class: 'c-tweet__link'
+      = render partial: 'shared/tweet_content', locals: { tweet: tweet }

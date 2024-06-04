@@ -6,18 +6,25 @@ class TweetsController < ApplicationController
   def index
     @tweet = current_user.tweets.new
 
-    if params[:following]
+    @tweets = if params[:following]
 
-      @tweets = Tweet.where(user_id: current_user.followings.pluck(:id))
+                Tweet.where(user_id: current_user.followings.pluck(:id))
                      .includes(image_attachment: :blob, user: { avatar_attachment: :blob })
                      .order(created_at: :desc).page(params[:page]).per(10)
-    else
-      @tweets = Tweet.includes(image_attachment: :blob,
-                               user: { avatar_attachment: :blob }).order(created_at: :desc).page(params[:page]).per(10)
-    end
+              else
+                Tweet.includes(image_attachment: :blob,
+                               user: { avatar_attachment: :blob }).order(created_at: :desc)
+                     .page(params[:page]).per(10)
+              end
   end
 
-  def show; end
+  def show
+    @tweet = Tweet.find_by(id: params[:id])
+    @comments = @tweet.comments.includes(image_attachment: :blob,
+                                         user: { avatar_attachment: :blob })
+                      .page(params[:page]).per(10).order(created_at: :desc)
+    @comment = @tweet.comments.build
+  end
 
   def create
     @tweets = Tweet.includes(:user,
