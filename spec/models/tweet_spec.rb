@@ -7,6 +7,7 @@
 #  id         :bigint           not null, primary key
 #  user_id    :bigint           not null
 #  content    :text             not null
+#  parent_id  :bigint
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

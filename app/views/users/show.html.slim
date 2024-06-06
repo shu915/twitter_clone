@@ -60,12 +60,12 @@
 
         
           .p-profile__tab-item
-            = link_to 'コメント', user_path(tab: 'comment'), class: "p-profile__tab-link #{ params[:tab] === 'comment' ? 'p-profile__tab-link--active' : '' }"
+            = link_to '返信', user_path(tab: 'reply'), class: "p-profile__tab-link #{ params[:tab] === 'reply' ? 'p-profile__tab-link--active' : '' }"
       
       .p-profile__tweet-container
         .p-profile__tweet-list
           - @tweets.each do |tweet|
-            = render partial: 'shared/tweet_link', locals: { tweet: tweet}
+            = render partial: 'shared/tweet', locals: { tweet: tweet}
 
         .p-profile__tweet-page
           = paginate @tweets
