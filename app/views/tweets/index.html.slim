@@ -34,7 +34,7 @@
           
       ul.p-home__tweet-list
         - @tweets.each do |tweet|
-          = render partial: 'shared/tweet_link', locals: { tweet: tweet}
+          = render partial: 'shared/tweet', locals: { tweet: tweet}
 
       .p-home__tweet-page
         = paginate @tweets

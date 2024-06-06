@@ -15,7 +15,8 @@ Rails.application.routes.draw do
 
   root 'tweets#index'
   resources :tweets, only: %i[index show create] do
-    resources :comments, only: %i[create]
+    resource :like, only: %i[create destroy]
+    post 'reply', to: 'tweets#reply_create', as: 'reply_create'
   end
 
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
