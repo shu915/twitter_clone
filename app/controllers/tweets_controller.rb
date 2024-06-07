@@ -19,11 +19,11 @@ class TweetsController < ApplicationController
   end
 
   def show
-    @tweet = Tweet.find_by(id: params[:id])
-    @comments = @tweet.comments.includes(image_attachment: :blob,
-                                         user: { avatar_attachment: :blob })
-                      .page(params[:page]).per(10).order(created_at: :desc)
-    @comment = @tweet.comments.build
+    @tweet = Tweet.find(params[:id])
+    @replies = @tweet.replies.includes(image_attachment: :blob,
+                                       user: { avatar_attachment: :blob })
+                     .page(params[:page]).per(10).order(created_at: :desc)
+    @reply = @tweet.replies.build
   end
 
   def create
@@ -36,6 +36,20 @@ class TweetsController < ApplicationController
       redirect_to root_path
     else
       render 'tweets/index', status: :unprocessable_entity
+    end
+  end
+
+  def reply_create
+    @tweet = Tweet.find(params[:tweet_id])
+    @reply = @tweet.replies.build(tweet_params)
+    @reply.user = current_user
+    @replies = @tweet.replies
+
+    if @reply.save
+      redirect_to tweet_path(@tweet), notice: '返信が投稿されました'
+
+    else
+      render 'tweets/show', status: :unprocessable_entity
     end
   end
 

@@ -39,14 +39,14 @@ users.each do |user_data|
   end
 
   # いいね
-  user.liked_tweets << tweets[0..1]
+  # user.liked_tweets << tweets[0..1]
 
   # リツイート
   user.retweeted_tweets << tweets[2..3]
 
   # コメント
-  user.comments.create(content: 'コメント1', tweet: tweets[4])
-  user.comments.create(content: 'コメント2', tweet: tweets[5])
+  user.tweets.create(content: '返信1', parent_id: tweets[4].id)
+  user.tweets.create(content: '返信2', parent_id: tweets[5].id)
 end
 
 # フォロー関係

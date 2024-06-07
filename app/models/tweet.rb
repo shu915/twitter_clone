@@ -7,6 +7,7 @@
 #  id         :bigint           not null, primary key
 #  user_id    :bigint           not null
 #  content    :text             not null
+#  parent_id  :bigint
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
@@ -19,7 +20,8 @@ class Tweet < ApplicationRecord
   has_many :retweets, dependent: :destroy
   has_many :retweeted_user, through: :retweets, source: :user
 
-  has_many :comments, dependent: :destroy
+  belongs_to :parent, class_name: 'Tweet', optional: true, inverse_of: :replies
+  has_many :replies, class_name: 'Tweet', foreign_key: 'parent_id', dependent: :destroy, inverse_of: :parent
 
   has_one_attached :image
 
