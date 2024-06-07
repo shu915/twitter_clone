@@ -1,15 +1,13 @@
 @use "../global" as global;
 
 .c-tweet {
-}
-.c-tweet__link {
-  
-  display: flex;
   padding: 1rem;
   border-bottom: 1px solid #eee;
-  &:hover {
-    color: #333;
-  }
+  
+}
+
+.c-tweet__wrap {
+  display: flex;
 }
 
 .c-tweet__avatar {
@@ -19,8 +17,14 @@
 }
 .c-tweet__content {
   margin-left: 1rem;
+  
 }
 
+.c-tweet__link {
+  &:hover {
+    color: #333;
+  }
+}
 
 .c-tweet__display-name {
   font-weight: bold;
@@ -59,4 +63,24 @@
   & > img {
 
   }
+}
+
+.c-tweet__footer {
+  padding-top: 1rem;
+  padding-left: 1rem;
+}
+
+.c-tweet__like {
+  &:hover {
+    color: red;
+  }
+}
+
+.c-tweet__like-fill {
+  color: red;
+}
+
+.c-tweet__like-count {
+  margin-left: 0.5rem;
+  font-style: normal;
 }

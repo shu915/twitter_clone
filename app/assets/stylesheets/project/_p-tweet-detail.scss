@@ -8,26 +8,25 @@
   padding-top: 1rem;
   width: 100%;
   border-bottom: 1px solid #eee;
-  padding-bottom: 1rem;
 }
 
-.p-tweet-detail__comment-container {
+.p-tweet-detail__reply-container {
   display: flex;
   padding-left: 1rem;
   padding-top: 1rem;
 }
-.p-tweet-detail__comment-avatar {
+.p-tweet-detail__reply-avatar {
   width: 4rem;
   height: 4rem;
   border-radius: 50%;
 }
 
-.p-tweet-detail__comment-form {
+.p-tweet-detail__reply-form {
   margin-left: 1rem;
   width: 100%;
 }
 
-.p-tweet-detail__comment-area {
+.p-tweet-detail__reply-area {
   resize: none;
   border: none;
   outline: none;
@@ -36,18 +35,18 @@
   height: 5rem;
 }
 
-.p-tweet-detail__comment-footer {
+.p-tweet-detail__reply-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.p-tweet_detail__comment-form-group {
+.p-tweet_detail__reply-form-group {
   display: flex;
   flex-direction: column;
 }
 
-.p-tweet-detail__comment-button {
+.p-tweet-detail__reply-button {
   width: 7rem;
 }
 

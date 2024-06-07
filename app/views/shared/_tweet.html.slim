@@ -1,0 +1,38 @@
+li.c-tweet
+  .c-tweet__wrap
+    = link_to user_path(tweet.user_id), class: "c-tweet__avatar"
+      = image_tag tweet.user.avatar
+    .c-tweet__content
+      = link_to user_path(tweet.user_id), class: "c-tweet__name-wrap" do
+        span.c-tweet__display-name
+          = tweet.user.display_name
+        span.c-tweet__account-name
+          |@
+          = tweet.user.account_name
+        span.c-tweet__created_at 
+          - if tweet.created_at.present?
+            = tweet.created_at.strftime("%Y年%m月%d日 %H:%M")
+      - if tweet.parent_id.present?
+        .c-tweet__reply
+          | 返信先は@
+          = link_to tweet.user.account_name, tweet_path(tweet.parent_id), class: 'c-tweet__reply-link'
+          | さん
+      
+      = link_to tweet_path(tweet), class: "c-tweet__text-wrap"
+        = sanitize(simple_format(tweet.content))
+        - if  tweet.image.attached?
+          .c-tweet__image
+            = image_tag tweet.image
+
+    
+  .c-tweet__footer
+    - if current_user.likes.exists?(tweet: tweet)
+      = link_to tweet_like_path(tweet), data: { turbo_method: :delete } do
+        i.bi.bi-suit-heart-fill.c-tweet__like-fill
+          span.c-tweet__like-count
+            = tweet.likes_count
+    - else
+      = link_to tweet_like_path(tweet), data: { turbo_method: :post } do
+        i.bi.bi-suit-heart.c-tweet__like
+          span.c-tweet__like-count 
+            = tweet.likes_count
