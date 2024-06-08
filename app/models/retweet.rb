@@ -13,4 +13,5 @@
 class Retweet < ApplicationRecord
   belongs_to :user
   belongs_to :tweet
+  counter_culture :tweet
 end

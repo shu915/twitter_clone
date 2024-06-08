@@ -72,6 +72,15 @@
 .p-home__form-image {
   width: 6rem;
   border-radius: 50%;
+  height: 6rem;
+  flex-shrink: 0;
+
+  overflow: hidden;
+
+  & > img {
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .p-home_form-button {

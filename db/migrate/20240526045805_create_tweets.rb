@@ -7,6 +7,7 @@ class CreateTweets < ActiveRecord::Migration[7.0]
       t.text :content, null: false
       t.references :parent, foreign_key: { to_table: :tweets }
       t.integer :likes_count, null: false, default: 0
+      t.integer :retweets_count, null: false, default: 0
       t.timestamps
     end
   end

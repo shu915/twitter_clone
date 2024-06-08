@@ -85,6 +85,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_29_021313) do
     t.text "content", null: false
     t.bigint "parent_id"
     t.integer "likes_count", default: 0, null: false
+    t.integer "retweets_count", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["parent_id"], name: "index_tweets_on_parent_id"

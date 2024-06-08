@@ -14,6 +14,13 @@
   width: 4rem;
   height: 4rem;
   flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+
+  & > img {
+    height: 100%;
+    object-fit: cover;
+  }
 }
 .c-tweet__content {
   margin-left: 1rem;
@@ -68,6 +75,10 @@
 .c-tweet__footer {
   padding-top: 1rem;
   padding-left: 1rem;
+  display: flex;
+}
+.c-tweet__like-wrap {
+  width: 5rem;
 }
 
 .c-tweet__like {
@@ -80,7 +91,23 @@
   color: red;
 }
 
-.c-tweet__like-count {
+.c-tweet__like-count,
+.c-tweet__retweet-count {
   margin-left: 0.5rem;
   font-style: normal;
+}
+
+.c-tweet__retweet-wrap {
+  margin-left: 2rem;
+}
+
+.c-tweet__retweet {
+  &--true {
+    color: #17BF63;
+  }
+}
+
+.c-tweet__retweet-person {
+  font-weight: 700;
+  font-size: 0.8rem;
 }
