@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   root 'tweets#index'
   resources :tweets, only: %i[index show create] do
     resource :like, only: %i[create destroy]
+    resource :retweet, only: %i[create destroy]
     post 'reply', to: 'tweets#reply_create', as: 'reply_create'
   end
 

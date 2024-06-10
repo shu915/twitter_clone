@@ -39,7 +39,7 @@ users.each do |user_data|
   end
 
   # いいね
-  # user.liked_tweets << tweets[0..1]
+  user.liked_tweets << tweets[0..1]
 
   # リツイート
   user.retweeted_tweets << tweets[2..3]

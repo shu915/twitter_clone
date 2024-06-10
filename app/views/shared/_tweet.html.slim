@@ -3,6 +3,17 @@ li.c-tweet
     = link_to user_path(tweet.user_id), class: "c-tweet__avatar"
       = image_tag tweet.user.avatar
     .c-tweet__content
+      - if tweet.retweets.exists?
+        .c-tweet__retweet-person
+         | リツイートされました
+      /   .c-tweet__retweet-person
+      /     - if tweet.retweeted_users.include?(current_user)
+      /       | あなたによってリツートされた
+      /     - elsif params[:following] 
+      /       = link_to current_user.followings.last.display_name + 'によってリツイートされた', user_path(current_user.followings.last)
+      /     - else 
+      /       = link_to tweet.retweeted_users.last.display_name + 'によってリツイートされた', user_path(tweet.retweeted_users.last)
+        
       = link_to user_path(tweet.user_id), class: "c-tweet__name-wrap" do
         span.c-tweet__display-name
           = tweet.user.display_name
@@ -26,13 +37,30 @@ li.c-tweet
 
     
   .c-tweet__footer
-    - if current_user.likes.exists?(tweet: tweet)
-      = link_to tweet_like_path(tweet), data: { turbo_method: :delete } do
-        i.bi.bi-suit-heart-fill.c-tweet__like-fill
-          span.c-tweet__like-count
-            = tweet.likes_count
-    - else
-      = link_to tweet_like_path(tweet), data: { turbo_method: :post } do
-        i.bi.bi-suit-heart.c-tweet__like
-          span.c-tweet__like-count 
-            = tweet.likes_count
+    .c-tweet__like-wrap
+      - if current_user.likes.exists?(tweet: tweet)
+        = link_to tweet_like_path(tweet), data: { turbo_method: :delete } do
+          i.bi.bi-suit-heart-fill.c-tweet__like-fill
+            - if tweet.likes_count > 0
+              span.c-tweet__like-count
+                = tweet.likes_count
+      - else
+        = link_to tweet_like_path(tweet), data: { turbo_method: :post } do
+          i.bi.bi-suit-heart.c-tweet__like
+            - if tweet.likes_count > 0
+              span.c-tweet__like-count 
+               = tweet.likes_count
+    
+    .c-tweet__retweet-wrap
+      - if current_user.retweets.exists?(tweet: tweet)
+        = link_to tweet_retweet_path(tweet), data: { turbo_method: :delete } do
+          i.bi.bi-arrow-repeat.c-tweet__retweet.c-tweet__retweet--true
+            - if tweet.retweets_count > 0
+              span.c-tweet__retweet-count
+                = tweet.retweets_count
+      - else
+        = link_to tweet_retweet_path(tweet), data: { turbo_method: :post } do
+          i.bi.bi-arrow-repeat.c-tweet__retweet
+            - if tweet.retweets_count > 0
+              span.c-tweet__retweet-count 
+                = tweet.retweets_count
