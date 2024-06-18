@@ -1,7 +1,7 @@
 div.p-devise__links
   - if devise_mapping.omniauthable?
     - resource_class.omniauth_providers.each do |provider|
-      = button_to "#{OmniAuth::Utils.camelize(provider)}でログイン", omniauth_authorize_path(resource_name, provider), data: { turbo: false }, class: "c-button c-button__#{OmniAuth::Utils.camelize(provider)}"
+      = button_to "#{OmniAuth::Utils.camelize(provider)}でログイン", omniauth_authorize_path(resource_name, provider), class: "c-button c-button__#{OmniAuth::Utils.camelize(provider)}"
       br
 
   - if controller_name != 'sessions'
