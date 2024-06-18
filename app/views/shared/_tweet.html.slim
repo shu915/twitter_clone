@@ -6,23 +6,35 @@ li.c-tweet
       - if tweet.retweets.exists?
         .c-tweet__retweet-person
          | リツイートされました
-      /   .c-tweet__retweet-person
-      /     - if tweet.retweeted_users.include?(current_user)
-      /       | あなたによってリツートされた
-      /     - elsif params[:following] 
-      /       = link_to current_user.followings.last.display_name + 'によってリツイートされた', user_path(current_user.followings.last)
-      /     - else 
-      /       = link_to tweet.retweeted_users.last.display_name + 'によってリツイートされた', user_path(tweet.retweeted_users.last)
-        
-      = link_to user_path(tweet.user_id), class: "c-tweet__name-wrap" do
-        span.c-tweet__display-name
-          = tweet.user.display_name
-        span.c-tweet__account-name
-          |@
-          = tweet.user.account_name
-        span.c-tweet__created_at 
-          - if tweet.created_at.present?
-            = tweet.created_at.strftime("%Y年%m月%d日 %H:%M")
+      .c-tweet__meta
+        = link_to user_path(tweet.user_id), class: "c-tweet__name-wrap" do
+          span.c-tweet__display-name
+            = tweet.user.display_name
+          span.c-tweet__account-name
+            |@
+            = tweet.user.account_name
+          span.c-tweet__created_at 
+            - if tweet.created_at.present?
+              = tweet.created_at.strftime("%Y年%m月%d日 %H:%M")
+        div.c-tweet__action-button-wrap
+          div.js-tweet-action.c-tweet__action-button
+            span.c-tweet__action-button-dot
+            span.c-tweet__action-button-dot
+            span.c-tweet__action-button-dot
+          ul.c-tweet__action-list
+            - unless current_user === tweet.user
+              - if current_user.following?(tweet.user)
+                li.c-tweet__action-item
+                  = link_to 'フォロー解除', user_follow_path(tweet.user), data: { turbo_method: :delete }
+              - else
+                li.c-tweet__action-item
+                  = link_to 'フォローする', user_follow_path(tweet.user), data: { turbo_method: :post }
+            li.c-tweet__action-item 未実装の機能
+            li.c-tweet__action-item 
+              | 未実装の機能
+            li.c-tweet__action-item 
+              | 未実装の機能
+      .c-tweet_follow 
       - if tweet.parent_id.present?
         .c-tweet__reply
           | 返信先は@
