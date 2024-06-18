@@ -1,0 +1,59 @@
+@use "../global/" as global;
+
+
+.c-user {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+  padding-inline: 1rem;
+
+}
+.c-user__wrap {
+  display: flex;
+  gap: 1.5rem;
+
+
+} 
+.c-user__avatar {
+  width: 4rem;
+  height: 4rem;
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+
+  & > img {
+    height: 100%;
+    object-fit: cover;
+  }
+
+      }
+       
+.c-user__content {
+
+}
+.c-user__meta {
+  display: flex;
+  justify-content: space-between;
+}
+.c-user__display-name {
+  font-weight: 700;
+}
+             
+.c-user__account-name {
+  font-size: 0.825rem;
+  color: #555;
+  margin-left: 0.5rem;
+}
+
+.c-user__follow-link {
+  display: inline-block;
+  border-radius: 1rem;
+  padding: 0.2rem 1.5rem;
+  background-color: global.$primary-color;
+  font-size: 0.8rem;
+  color: #fff;
+
+  &:hover {
+    color: #fff;
+  }
+}

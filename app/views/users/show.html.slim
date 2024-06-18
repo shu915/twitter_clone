@@ -3,47 +3,7 @@
 
     .p-profile
       
-      .p-profile__header
-        = image_tag @user.header_image, alt: 'プロフィールのヘッダーイメージ'
-      .p-profile__content
-        .p-profile__avatar 
-          = image_tag @user.avatar, alt: 'プロフィール画像'
-        .p-profile__edit-button-wrap 
-          - if current_user == @user
-            = link_to 'プロフィールを編集', edit_user_path, class: 'p-profile__edit-button c-button'
-          - else 
-            = link_to 'フォローする(仮)', root_path, class: 'p-profile__edit-button c-button'
-        .p-profile__display-name
-          = @user.display_name
-        .p-profile__account-name
-          |@
-          = @user.account_name
-        .p-profile__self-intro
-          = sanitize(simple_format(@user.self_intro))
-        .p-profile__detail
-          span.p-profile__location
-            i.bi.bi-geo-alt-fill
-            = @user.location.blank? ? '秘密' : @user.location
-          - if @user.url?
-            span.p-profile__url
-             i.bi.bi-link-45deg
-             = link_to @user.url, @user.url
-          span.p-profile__birthday
-            i.bi.bi-balloon 
-            | 誕生日:
-            = @user.birthday
-        .p-profile__created-at
-          i.bi.bi-calendar-check
-          = @user.created_at.strftime('%Y年%m月')
-          | からtwiiterを利用しています
-        
-        .p-profile__follow-wrap
-          span.p-profile__followring
-            = @user.followings.count
-            |  フォロー中
-          span.p-profile__followed
-            = @user.followeds.count
-            |  フォロワー
+      = render partial: 'shared/profile'
       
       .p-profile__tab
         .p-profile__tab-list
