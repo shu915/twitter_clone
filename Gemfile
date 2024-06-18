@@ -57,13 +57,13 @@ gem 'aws-sdk-s3'
 gem 'counter_culture'
 gem 'devise'
 gem 'html2slim'
+gem 'importmap-rails'
+gem 'jquery-rails'
 gem 'kaminari'
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'omniauth-rails_csrf_protection'
 gem 'slim'
-gem 'jquery-rails'
-gem 'importmap-rails'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
