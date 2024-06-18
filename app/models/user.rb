@@ -87,6 +87,10 @@ class User < ApplicationRecord
     user
   end
 
+  def following?(target_user)
+    followings.include?(target_user)
+  end
+
   private
 
   def attach_default_avatar_and_header

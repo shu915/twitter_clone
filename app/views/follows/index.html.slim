@@ -1,0 +1,32 @@
+.l-inner
+  = render partial: 'shared/sidebar'
+
+  .p-follow
+    .p-follow__tab
+      .p-follow__tab-following
+        = link_to 'フォロー中', follows_index_path, class: "p-follow__tab-link #{ params[:followed] ? '' : 'p-follow__tab-link--active' }"
+      
+
+      .p-follow__tab-followed
+        = link_to 'フォロワー', follows_index_path(followed: true), class: "p-follow__tab-link  #{ params[:followed] ? 'p-follow__tab-link--active' : '' }"
+
+    - @users.each do |user|
+      .c-user
+        .c-user__wrap 
+          .c-user__avatar
+            = image_tag user.avatar, alt: 'プロフィール画像'
+          .c-user__content
+            .c-user__meta
+              .c-user__name-wrap
+                span.c-user__display-name
+                  = user.display_name
+                span.c-user__account-name
+                  | @
+                  = user.account_name
+              span.c-user__follow-button
+                - if current_user.following?(user)
+                  = link_to 'フォローを外す', user_follow_path(user_id: user.id ), data: { turbo_method: :delete }, class: 'c-user__follow-link'
+                - else
+                  = link_to 'フォローする', user_follow_path(user_id: user.id), data: { turbo_method: :post }, class: 'c-user__follow-link'
+              
+            = user.self_intro
