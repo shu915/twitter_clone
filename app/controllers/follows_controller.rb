@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class FollowsController < ApplicationController
   def index
-    if params[:followed]
-      @users = current_user.followeds.includes(avatar_attachment: :blob)
-    else
-      @users = current_user.followings.includes(avatar_attachment: :blob)
-    end
+    @users = if params[:followed]
+               current_user.followeds.includes(avatar_attachment: :blob)
+             else
+               current_user.followings.includes(avatar_attachment: :blob)
+             end
   end
 
   def create

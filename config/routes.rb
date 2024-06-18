@@ -23,6 +23,5 @@ Rails.application.routes.draw do
     post 'reply', to: 'tweets#reply_create', as: 'reply_create'
   end
 
-
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 end
