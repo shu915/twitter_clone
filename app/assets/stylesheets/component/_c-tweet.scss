@@ -3,7 +3,6 @@
 .c-tweet {
   padding: 1rem;
   border-bottom: 1px solid #eee;
-  
 }
 
 .c-tweet__wrap {
@@ -24,13 +23,14 @@
 }
 .c-tweet__content {
   margin-left: 1rem;
+  width: 75%;
   
 }
 
-.c-tweet__link {
-  &:hover {
-    color: #333;
-  }
+.c-tweet__meta {
+  display: flex;
+  justify-content: space-between;
+
 }
 
 .c-tweet__display-name {
@@ -48,6 +48,45 @@
   color: #555;
   margin-left: 0.5rem;
 
+}
+
+.c-tweet__action-button-wrap {
+  position: relative;
+}
+
+.c-tweet__action-button {
+  height: 1.5rem;
+  width: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  border: 1px solid #999;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.c-tweet__action-button-dot {
+  width: 0.2rem;
+  height: 0.2rem;
+  border-radius: 50%;
+  background-color: #999;
+}
+
+.c-tweet__action-list {
+  border: 1px solid #999;
+  border-radius: 1rem;
+  display: none;
+  position: absolute;
+  z-index: 3;
+  background-color: #fff;
+  right: 0;
+  width: 8rem;
+}
+
+.c-tweet__action-item {
+  padding: 0.25rem 0.5rem;
 }
 
 .c-tweet__reply {

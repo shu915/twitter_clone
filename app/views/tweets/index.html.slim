@@ -6,10 +6,10 @@
 
       .p-home__tab-list
         .p-home__tab-item
-          = link_to 'おすすめ', root_path, class: "p-home__tab-link #{ params[:following] ? '' : 'p-home__tab-link--active' }"
+          = link_to 'おすすめ', root_path, class: "p-home__tab-link #{ params[:following] ? '' : 'p-home__tab-link--active' }", data: { turbo: false }
 
         .p-home__tab-item
-          = link_to 'フォロー中', root_path(following: true), class: "p-home__tab-link #{ params[:following] ? 'p-home__tab-link--active' : '' }"
+          = link_to 'フォロー中', root_path(following: true), class: "p-home__tab-link #{ params[:following] ? 'p-home__tab-link--active' : '' }", data: { turbo: false }
           
       
       
