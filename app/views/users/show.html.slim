@@ -8,19 +8,19 @@
       .p-profile__tab
         .p-profile__tab-list
           .p-profile__tab-item
-            = link_to 'ツイート', user_path, class: "p-profile__tab-link #{ !params[:tab] ? 'p-profile__tab-link--active' : '' }",  data: { turbo: false }
+            = link_to 'ツイート', user_path, class: "p-profile__tab-link #{ !params[:tab] ? 'p-profile__tab-link--active' : '' }"
 
        
           .p-profile__tab-item
-            = link_to 'いいね', user_path(tab: 'like'), class: "p-profile__tab-link #{ params[:tab] === 'like' ? 'p-profile__tab-link--active' : '' }",  data: { turbo: false }
+            = link_to 'いいね', user_path(tab: 'like'), class: "p-profile__tab-link #{ params[:tab] === 'like' ? 'p-profile__tab-link--active' : '' }"
 
       
           .p-profile__tab-item
-            = link_to 'リツイート', user_path(tab: 'retweet'), class: "p-profile__tab-link #{ params[:tab] === 'retweet' ? 'p-profile__tab-link--active' : '' }",  data: { turbo: false }
+            = link_to 'リツイート', user_path(tab: 'retweet'), class: "p-profile__tab-link #{ params[:tab] === 'retweet' ? 'p-profile__tab-link--active' : '' }"
 
         
           .p-profile__tab-item
-            = link_to '返信', user_path(tab: 'reply'), class: "p-profile__tab-link #{ params[:tab] === 'reply' ? 'p-profile__tab-link--active' : '' }",  data: { turbo: false }
+            = link_to '返信', user_path(tab: 'reply'), class: "p-profile__tab-link #{ params[:tab] === 'reply' ? 'p-profile__tab-link--active' : '' }"
       
       .p-profile__tweet-container
         .p-profile__tweet-list

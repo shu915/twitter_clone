@@ -6,8 +6,7 @@ import $ from '../../vendor/javascript/jquery';
 window.$ = $;
 window.jQuery = $;
 
-$(function () {
-  
+$(document).on('turbo:load', function() {
   $('.js-tweet-action').on('click', function () {
     $(this).next().fadeToggle();
   });

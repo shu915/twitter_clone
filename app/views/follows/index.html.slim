@@ -4,11 +4,11 @@
   .p-follow
     .p-follow__tab
       .p-follow__tab-following
-        = link_to 'フォロー中', follows_index_path, class: "p-follow__tab-link #{ params[:followed] ? '' : 'p-follow__tab-link--active' }",  data: { turbo: false }
+        = link_to 'フォロー中', follows_index_path, class: "p-follow__tab-link #{ params[:followed] ? '' : 'p-follow__tab-link--active' }"
       
 
       .p-follow__tab-followed
-        = link_to 'フォロワー', follows_index_path(followed: true), class: "p-follow__tab-link  #{ params[:followed] ? 'p-follow__tab-link--active' : '' }",  data: { turbo: false }
+        = link_to 'フォロワー', follows_index_path(followed: true), class: "p-follow__tab-link  #{ params[:followed] ? 'p-follow__tab-link--active' : '' }"
 
     - @users.each do |user|
       .c-user

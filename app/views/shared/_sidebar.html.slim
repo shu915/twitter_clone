@@ -2,14 +2,14 @@
       nav.p-sidebar__nav
         ul.p-sidebar__list
           li.p-sidebar__item
-            = link_to root_path, class: 'p-sidebar__link', data: { turbo: false } do
+            = link_to root_path, class: 'p-sidebar__link' do
               i.bi.bi-house-fill.p-sidebar__icon
               | ホーム
             end
 
 
           li.p-sidebar__item
-            = link_to user_path(id: current_user.id), class: 'p-sidebar__link',  data: { turbo: false } do
+            = link_to user_path(id: current_user.id), class: 'p-sidebar__link' do
               i.bi.bi-person-fill.p-sidebar__icon
               | プロフィール
             end
