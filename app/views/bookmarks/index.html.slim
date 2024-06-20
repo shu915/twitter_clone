@@ -1,0 +1,12 @@
+ .l-inner
+    = render partial: 'shared/sidebar'
+
+    .p-bookmark
+      h2.p-bookmark__title 
+        | ブックマーク
+      
+      - @bookmark.each do |bookmark|
+        = render partial: 'shared/tweet', locals: { tweet: bookmark.tweet }
+      
+      .p-bookmark__page
+        = paginate @bookmark
