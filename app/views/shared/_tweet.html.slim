@@ -76,3 +76,17 @@ li.c-tweet
             - if tweet.retweets_count > 0
               span.c-tweet__retweet-count 
                 = tweet.retweets_count
+
+    .c-tweet__bookmark-wrap
+      - if current_user.bookmarks.exists?(tweet_id: tweet.id)
+        = link_to tweet_bookmark_path(tweet), data: { turbo_method: :delete } do
+          i.bi.bi-bookmark.c-tweet__bookmark.c-tweet__bookmark--true
+            - if tweet.bookmarks_count > 0
+              span.c-tweet__bookmark-count
+                = tweet.bookmarks_count
+      - else
+        = link_to tweet_bookmark_path(tweet_id: tweet.id), data: { turbo_method: :post } do
+          i.bi.bi-bookmark.c-tweet__bookmark
+            - if tweet.bookmarks_count > 0
+              span.c-tweet__bookmark-count 
+                = tweet.bookmarks_count

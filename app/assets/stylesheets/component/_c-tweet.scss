@@ -131,19 +131,29 @@
 }
 
 .c-tweet__like-count,
-.c-tweet__retweet-count {
+.c-tweet__retweet-count,
+.c-tweet__bookmark-count {
   margin-left: 0.5rem;
   font-style: normal;
 }
 
 .c-tweet__retweet-wrap {
   margin-left: 2rem;
+  width: 5rem;
 }
 
 .c-tweet__retweet {
   &--true {
     color: #17BF63;
   }
+}
+
+.c-tweet__bookmark {
+  margin-left: 2rem;
+  &--true {
+    color: blue;
+  }
+    
 }
 
 .c-tweet__retweet-person {
