@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class FollowsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @users = if params[:followed]
                current_user.followeds.includes(avatar_attachment: :blob)

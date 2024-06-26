@@ -4,14 +4,15 @@
 #
 # Table name: tweets
 #
-#  id             :bigint           not null, primary key
-#  user_id        :bigint           not null
-#  content        :text             not null
-#  parent_id      :bigint
-#  likes_count    :integer          default(0), not null
-#  retweets_count :integer          default(0), not null
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
+#  id              :bigint           not null, primary key
+#  user_id         :bigint           not null
+#  content         :text             not null
+#  parent_id       :bigint
+#  likes_count     :integer          default(0), not null
+#  retweets_count  :integer          default(0), not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  bookmarks_count :integer          default(0), not null
 #
 class Tweet < ApplicationRecord
   belongs_to :user

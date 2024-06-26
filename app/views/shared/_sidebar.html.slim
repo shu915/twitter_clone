@@ -16,7 +16,13 @@
 
           li.p-sidebar__item
             = link_to bookmarks_index_path, class: 'p-sidebar__link' do
-              i.bi.bi-person-fill.p-sidebar__icon
+              i.bi.bi-bookmark-fill.p-sidebar__icon
               | ブックマーク
+            end
+
+          li.p-sidebar__item
+            = link_to rooms_path, class: 'p-sidebar__link' do
+              i.bi.bi-envelope-fill.p-sidebar__icon
+              | メッセージ
             end
           
