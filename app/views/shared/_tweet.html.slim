@@ -29,7 +29,13 @@ li.c-tweet
               - else
                 li.c-tweet__action-item
                   = link_to 'フォローする', user_follow_path(tweet.user), data: { turbo_method: :post }
-            li.c-tweet__action-item 未実装の機能
+            li.c-tweet__action-item
+              - unless current_user == tweet.user
+                - target_room_id = (current_user.entries.pluck(:room_id) & tweet.user.entries.pluck(:room_id)).first
+                - if target_room_id
+                  = link_to 'DMを送る', room_path(id: target_room_id)
+                - else
+                  = link_to 'DMを送る', rooms_path(user_id: tweet.user.id), data: { turbo_method: :post }
             li.c-tweet__action-item 
               | 未実装の機能
             li.c-tweet__action-item 

@@ -1,0 +1,14 @@
+.p-room__list
+  - if @rooms
+    - @rooms.each do | room |
+      - other_entry = room.entries.find { |entry| entry.user_id != current_user.id }
+      - other_user = other_entry.user
+      = link_to room_path(room), class: 'p-room__list-item' do
+        .p-room__list-item-image
+          = image_tag other_user.avatar
+        .p-room__list-item-container
+          h3.p-room__list-item-title 
+            = other_user.display_name
+          p.p-room__list-item-message
+            - if room.messages.last&.message
+              = room.messages.last.message

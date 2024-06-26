@@ -58,6 +58,11 @@ class User < ApplicationRecord
   has_many :bookmarks, dependent: :destroy
   has_many :bookmarked_tweets, through: :bookmarks, source: :tweet
 
+  has_many :entries, dependent: :destroy
+  has_many :entried_rooms, through: :entries, source: :room
+
+  has_many :messages, dependent: :destroy
+
   has_one_attached :avatar
   has_one_attached :header_image
 

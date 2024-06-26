@@ -3,13 +3,21 @@
 .p-profile__content
   .p-profile__avatar 
     = image_tag @user.avatar, alt: 'プロフィール画像'
-  .p-profile__edit-button-wrap 
+  .p-profile__button-wrap 
+   
+    - unless current_user == @user
+      - target_room_id = (current_user.entries.pluck(:room_id) & @user.entries.pluck(:room_id)).first
+      - if target_room_id
+        = link_to 'DMを送る', room_path(id: target_room_id), class: 'p-profile__button-message'
+      - else
+        = link_to 'DMを送る', rooms_path(user_id: @user.id), data: { turbo_method: :post }, class: 'p-profile__button-message'
+
     - if current_user == @user
-      = link_to 'プロフィールを編集', edit_user_path, class: 'p-profile__edit-button c-button'
+      = link_to 'プロフィールを編集', edit_user_path, class: 'p-profile__button-edit c-button'
     - elsif current_user.following?(@user)
-      = link_to 'フォロー解除', user_follow_path(@user), data: { turbo_method: :delete }, class: 'c-button p-profile__edit-button'
+      = link_to 'フォロー解除', user_follow_path(@user), data: { turbo_method: :delete }, class: 'c-button p-profile__button-edit'
     - else
-      = link_to 'フォローする', user_follow_path(@user), data: { turbo_method: :post }, class: 'p-profile__edit-button c-button'
+      = link_to 'フォローする', user_follow_path(@user), data: { turbo_method: :post }, class: 'p-profile__button-edit c-button'
   .p-profile__display-name
     = @user.display_name
   .p-profile__account-name

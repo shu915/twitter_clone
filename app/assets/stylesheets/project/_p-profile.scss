@@ -36,13 +36,27 @@
   }
 }
 
-.p-profile__edit-button-wrap {
-  text-align: right;
+.p-profile__button-wrap {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
   padding-right: 1rem;
-  height: 4rem;
   padding-top: 1.5rem;
+ 
 }
 
+.p-profile__button-message {
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  border: 1px solid #555;
+  font-size: 1.2rem;
+}
+
+
+.p-profile__button-edit {
+  width: 15rem;
+  text-align: center;
+}
 
 .p-profile__display-name {
   font-weight: bold;

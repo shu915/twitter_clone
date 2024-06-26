@@ -1,0 +1,27 @@
+  .l-inner
+    = render partial: 'shared/sidebar'
+
+    = render partial: 'shared/room_list';
+
+    .p-room__detail
+      .p-room__detail-top
+        .p-room__detail-title 
+          = @target_user.display_name
+          | さんとの対話
+
+        .p-room__detail-message-list
+          - @messages.each do |message|
+            - if message.user == current_user
+              .p-room__detail-message-self
+                = message.message
+            - else 
+              .p-room__detail-message-target
+                = message.message
+
+
+
+      = form_with model: [@room, @message], class: 'p-room__detail-message-form' do | form |
+        = form.text_area :message, class: 'p-room__detail-message-input', placeholder: 'DMを入力'
+        = render partial: 'shared/validation_error', locals: { object: @message ,field: :message }
+
+        = form.submit '送信', class: 'c-button p-room__detail-message-button'
