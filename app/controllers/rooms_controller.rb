@@ -5,15 +5,14 @@ class RoomsController < ApplicationController
   before_action :check_entry, only: :show
 
   def index
-    my_entries = Entry.where(user_id: current_user.id)
-    my_room_ids = my_entries.pluck(:room_id)
+    my_room_ids = current_user.entries.pluck(:room_id)
     @rooms = Room.where(id: my_room_ids).includes(entries: [user: [avatar_attachment: :blob]]).order(created_at: :desc)
   end
 
   def create
     @room = Room.new
-    @entry1 = Entry.new(room: @room, user_id: current_user.id)
-    @entry2 = Entry.new(room: @room, user_id: params[:user_id])
+    @entry1 = @room.entries.build(user_id: current_user.id)
+    @entry2 = @room.entries.build(user_id: params[:user_id])
 
     if @room.save && @entry1.save && @entry2.save
       redirect_to room_path(@room)
@@ -23,8 +22,7 @@ class RoomsController < ApplicationController
   end
 
   def show
-    my_entries = Entry.where(user_id: current_user.id)
-    my_room_ids = my_entries.pluck(:room_id)
+    my_room_ids = current_user.entries.pluck(:room_id)
     @rooms = Room.where(id: my_room_ids).includes(entries: [user: [avatar_attachment: :blob]]).order(created_at: :desc)
 
     @room = Room.find(params[:id])
