@@ -9,13 +9,8 @@ Rails.application.routes.draw do
   }
   resources :users, only: %i[show edit update] do
     resource :follow, only: %i[index create destroy]
+    resources :notice, only: %i[index create]
   end
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # devise_scope :user do
-  #   get "/" => "users/sessions#new"
-  # end
 
   root 'tweets#index'
   resources :tweets, only: %i[index show create] do
