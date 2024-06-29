@@ -10,5 +10,5 @@
           h3.p-room__list-item-title 
             = other_user.display_name
           p.p-room__list-item-message
-            - if room.messages.last&.message
-              = room.messages.last.message
+            - if room.messages.last&.content
+              = room.messages.last.content

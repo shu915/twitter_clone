@@ -7,7 +7,7 @@
 #  id         :bigint           not null, primary key
 #  user_id    :bigint           not null
 #  room_id    :bigint           not null
-#  message    :text
+#  content    :text             not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
@@ -15,5 +15,5 @@ class Message < ApplicationRecord
   belongs_to :user
   belongs_to :room
 
-  validates :message, presence: true, length: { maximum: 140 }
+  validates :content, presence: true, length: { maximum: 140 }
 end

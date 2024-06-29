@@ -13,15 +13,15 @@
           - @messages.each do |message|
             - if message.user == current_user
               .p-room__detail-message-self
-                = message.message
+                = message.content
             - else 
               .p-room__detail-message-target
-                = message.message
+                = message.content
 
 
 
       = form_with model: [@room, @message], class: 'p-room__detail-message-form' do | form |
-        = form.text_area :message, class: 'p-room__detail-message-input', placeholder: 'DMを入力'
-        = render partial: 'shared/validation_error', locals: { object: @message ,field: :message }
+        = form.text_area :content, class: 'p-room__detail-message-input', placeholder: 'DMを入力'
+        = render partial: 'shared/validation_error', locals: { object: @message ,field: :content }
 
         = form.submit '送信', class: 'c-button p-room__detail-message-button'
