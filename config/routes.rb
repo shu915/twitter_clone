@@ -9,13 +9,8 @@ Rails.application.routes.draw do
   }
   resources :users, only: %i[show edit update] do
     resource :follow, only: %i[index create destroy]
+    resources :notice, only: %i[index create]
   end
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # devise_scope :user do
-  #   get "/" => "users/sessions#new"
-  # end
 
   root 'tweets#index'
   resources :tweets, only: %i[index show create] do
@@ -23,6 +18,10 @@ Rails.application.routes.draw do
     resource :retweet, only: %i[create destroy]
     post 'reply', to: 'tweets#reply_create', as: 'reply_create'
     resource :bookmark, only: %i[indec create destroy]
+  end
+
+  resources :rooms, only: %i[index show create] do
+    resources :messages, only: %i[create]
   end
 
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
