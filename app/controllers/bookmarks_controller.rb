@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class BookmarksController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @bookmark = current_user.bookmarks.includes(tweet: [:image_attachment, {
                                                   user: { avatar_attachment: :blob }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_20_080419) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_24_064935) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -61,6 +61,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_20_080419) do
     t.index ["user_id"], name: "index_bookmarks_on_user_id"
   end
 
+  create_table "entries", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "room_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_entries_on_room_id"
+    t.index ["user_id"], name: "index_entries_on_user_id"
+  end
+
   create_table "follows", force: :cascade do |t|
     t.bigint "following_id", null: false
     t.bigint "followed_id", null: false
@@ -80,6 +89,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_20_080419) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "room_id", null: false
+    t.text "content", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_messages_on_room_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
   create_table "retweets", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "tweet_id", null: false
@@ -87,6 +106,11 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_20_080419) do
     t.datetime "updated_at", null: false
     t.index ["tweet_id"], name: "index_retweets_on_tweet_id"
     t.index ["user_id"], name: "index_retweets_on_user_id"
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tweets", force: :cascade do |t|
@@ -141,10 +165,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_20_080419) do
   add_foreign_key "authorizations", "users"
   add_foreign_key "bookmarks", "tweets"
   add_foreign_key "bookmarks", "users"
+  add_foreign_key "entries", "rooms"
+  add_foreign_key "entries", "users"
   add_foreign_key "follows", "users", column: "followed_id"
   add_foreign_key "follows", "users", column: "following_id"
   add_foreign_key "likes", "tweets"
   add_foreign_key "likes", "users"
+  add_foreign_key "messages", "rooms"
+  add_foreign_key "messages", "users"
   add_foreign_key "retweets", "tweets"
   add_foreign_key "retweets", "users"
   add_foreign_key "tweets", "tweets", column: "parent_id"
