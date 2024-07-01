@@ -25,4 +25,10 @@
               i.bi.bi-envelope-fill.p-sidebar__icon
               | メッセージ
             end
+
+          li.p-sidebar__item
+            = link_to notices_index_path, class: 'p-sidebar__link' do
+              i.bi.bi-bell-fill.p-sidebar__icon
+              | 通知
+            end
           

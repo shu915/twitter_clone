@@ -14,6 +14,8 @@ class FollowsController < ApplicationController
   def create
     target_user = User.find(params[:user_id])
     current_user.followings << target_user
+    current_user.send_notices.create(receiver: target_user, notice_type: 0)
+
     redirect_back(fallback_location: root_path)
   end
 
