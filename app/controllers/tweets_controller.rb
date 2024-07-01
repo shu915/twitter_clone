@@ -41,6 +41,7 @@ class TweetsController < ApplicationController
     @replies = @tweet.replies
 
     if @reply.save
+      current_user.send_notices.create(receiver: @tweet.user, notice_type: 3, reply: @reply)
       redirect_to tweet_path(@tweet), notice: '返信が投稿されました'
 
     else

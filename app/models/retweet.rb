@@ -13,5 +13,6 @@
 class Retweet < ApplicationRecord
   belongs_to :user
   belongs_to :tweet
+  has_many :notices, dependent: :destroy
   counter_culture :tweet
 end

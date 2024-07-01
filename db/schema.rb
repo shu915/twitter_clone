@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_24_064935) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_30_041119) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -99,6 +99,23 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_24_064935) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
+  create_table "notices", force: :cascade do |t|
+    t.bigint "sender_id", null: false
+    t.bigint "receiver_id", null: false
+    t.integer "notice_type", null: false
+    t.bigint "like_id"
+    t.bigint "retweet_id"
+    t.bigint "reply_id"
+    t.boolean "read", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["like_id"], name: "index_notices_on_like_id"
+    t.index ["receiver_id"], name: "index_notices_on_receiver_id"
+    t.index ["reply_id"], name: "index_notices_on_reply_id"
+    t.index ["retweet_id"], name: "index_notices_on_retweet_id"
+    t.index ["sender_id"], name: "index_notices_on_sender_id"
+  end
+
   create_table "retweets", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "tweet_id", null: false
@@ -173,6 +190,11 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_24_064935) do
   add_foreign_key "likes", "users"
   add_foreign_key "messages", "rooms"
   add_foreign_key "messages", "users"
+  add_foreign_key "notices", "likes"
+  add_foreign_key "notices", "retweets"
+  add_foreign_key "notices", "tweets", column: "reply_id"
+  add_foreign_key "notices", "users", column: "receiver_id"
+  add_foreign_key "notices", "users", column: "sender_id"
   add_foreign_key "retweets", "tweets"
   add_foreign_key "retweets", "users"
   add_foreign_key "tweets", "tweets", column: "parent_id"

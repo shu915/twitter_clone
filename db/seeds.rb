@@ -9,11 +9,11 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 users = [
-  { account_name: 'user1', display_name: 'user1', email: 'user1@example.com',
+  { account_name: 'user1', display_name: 'user1', email: 'chukichi915@gmail.com',
     tel: '1234567890', birthday: '2000-01-01', password: 'password1' },
-  { account_name: 'user2', display_name: 'user2', email: 'user2@example.com',
+  { account_name: 'user2', display_name: 'user2', email: 'shu915.web.creation@gmail.com',
     tel: '9876543210', birthday: '2000-02-02', password: 'password2' },
-  { account_name: 'user3', display_name: 'user3', email: 'user3@example.com',
+  { account_name: 'user3', display_name: 'user3', email: 'uhs915@gmail.com',
     tel: '5555555555', birthday: '2000-03-03', password: 'password3' }
 ]
 

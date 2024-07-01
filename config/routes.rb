@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get 'notices/index'
   get 'bookmarks/index'
   get 'follows/index'
   devise_for :users, controllers: {
@@ -9,7 +10,7 @@ Rails.application.routes.draw do
   }
   resources :users, only: %i[show edit update] do
     resource :follow, only: %i[index create destroy]
-    resources :notice, only: %i[index create]
+    resources :notices, only: %i[index update]
   end
 
   root 'tweets#index'
