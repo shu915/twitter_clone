@@ -15,4 +15,20 @@ class Retweet < ApplicationRecord
   belongs_to :tweet
   has_many :notices, dependent: :destroy
   counter_culture :tweet
+
+  include Notifiable
+
+  private
+
+  def notification_sender
+    user
+  end
+
+  def notification_receiver
+    tweet.user
+  end
+
+  def notification_retweet_id
+    id
+  end
 end

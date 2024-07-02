@@ -9,15 +9,15 @@
     .p-tweet-detail__reply-container
       .p-tweet-detail__reply-avatar 
         = image_tag current_user.avatar
-      = form_with model: @reply ,url: tweet_reply_create_path(@tweet) , class: 'p-tweet-detail__reply-form' do |form|
+      = form_with model: @reply_tweet ,url: tweet_reply_create_path(@tweet) , class: 'p-tweet-detail__reply-form' do |form|
         = form.text_area :content, class: 'p-tweet-detail__reply-area', placeholder: '返信をツイート'
-        = render partial: 'shared/validation_error', locals: { object: @reply ,field: :content }
+        = render partial: 'shared/validation_error', locals: { object: @reply_tweet ,field: :content }
 
         .p-tweet-detail__reply-footer
           .p-tweet_detail__reply-form-group
             = form.label :image, '画像を選択', class: 'p-tweet-detail__reply-label'
             = form.file_field :image, class: 'p-tweet_detail__reply-input'
-            = render partial: 'shared/validation_error', locals: { object: @reply ,field: :image }
+            = render partial: 'shared/validation_error', locals: { object: @reply_tweet ,field: :image }
 
           = form.submit '返信', class: 'c-button p-tweet-detail__reply-button'
     
