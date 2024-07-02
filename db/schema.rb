@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_30_041119) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_02_070647) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -116,6 +116,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_30_041119) do
     t.index ["sender_id"], name: "index_notices_on_sender_id"
   end
 
+  create_table "replies", force: :cascade do |t|
+    t.bigint "parent_id", null: false
+    t.bigint "reply_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["parent_id"], name: "index_replies_on_parent_id"
+    t.index ["reply_id"], name: "index_replies_on_reply_id"
+  end
+
   create_table "retweets", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "tweet_id", null: false
@@ -133,13 +142,11 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_30_041119) do
   create_table "tweets", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.text "content", null: false
-    t.bigint "parent_id"
     t.integer "likes_count", default: 0, null: false
     t.integer "retweets_count", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "bookmarks_count", default: 0, null: false
-    t.index ["parent_id"], name: "index_tweets_on_parent_id"
     t.index ["user_id"], name: "index_tweets_on_user_id"
   end
 
@@ -195,8 +202,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_30_041119) do
   add_foreign_key "notices", "tweets", column: "reply_id"
   add_foreign_key "notices", "users", column: "receiver_id"
   add_foreign_key "notices", "users", column: "sender_id"
+  add_foreign_key "replies", "tweets", column: "parent_id"
+  add_foreign_key "replies", "tweets", column: "reply_id"
   add_foreign_key "retweets", "tweets"
   add_foreign_key "retweets", "users"
-  add_foreign_key "tweets", "tweets", column: "parent_id"
   add_foreign_key "tweets", "users"
 end

@@ -41,11 +41,11 @@ li.c-tweet
             li.c-tweet__action-item 
               | 未実装の機能
       .c-tweet_follow 
-      - if tweet.parent_id.present?
-        .c-tweet__reply
-          | 返信先は@
-          = link_to tweet.user.account_name, tweet_path(tweet.parent_id), class: 'c-tweet__reply-link'
-          | さん
+      / - if tweet.parent_id.present?
+      /   .c-tweet__reply
+      /     | 返信先は@
+      /     = link_to tweet.user.account_name, tweet_path(tweet.parent_id), class: 'c-tweet__reply-link'
+      /     | さん
       
       = link_to tweet_path(tweet), class: "c-tweet__text-wrap"
         = sanitize(simple_format(tweet.content))

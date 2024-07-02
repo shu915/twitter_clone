@@ -45,8 +45,8 @@ users.each do |user_data|
   user.retweeted_tweets << tweets[2..3]
 
   # コメント
-  user.tweets.create(content: '返信1', parent_id: tweets[4].id)
-  user.tweets.create(content: '返信2', parent_id: tweets[5].id)
+  # user.tweets.create(content: '返信1', parent_id: tweets[4].id)
+  # user.tweets.create(content: '返信2', parent_id: tweets[5].id)
 
   Notice.create(sender: user, receiver: user, notice_type: 1, like: user.likes.first)
 end
