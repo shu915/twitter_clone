@@ -1,0 +1,38 @@
+.c-notice-item {
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  border-bottom: 1px solid #eee;
+  justify-content: space-between;
+}
+
+.c-notice-item__left {
+  gap: 1rem;
+  display: flex;
+}
+
+.c-notice-item__image {
+  width: 2.5rem;
+  height: 2.5em;
+}
+
+.c-notice-item__container {
+
+}
+.c-notice-item__avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.c-notice-item__text  {
+  margin-top: 0.2rem;
+
+  & > a {
+    font-weight: bold;
+  }
+}
+
+.c-notice-item__original {
+  font-size: 0.875rem;
+  color: #555;
+}

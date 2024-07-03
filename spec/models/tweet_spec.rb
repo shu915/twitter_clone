@@ -7,7 +7,6 @@
 #  id              :bigint           not null, primary key
 #  user_id         :bigint           not null
 #  content         :text             not null
-#  parent_id       :bigint
 #  likes_count     :integer          default(0), not null
 #  retweets_count  :integer          default(0), not null
 #  created_at      :datetime         not null

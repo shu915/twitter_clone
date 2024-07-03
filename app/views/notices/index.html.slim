@@ -1,0 +1,66 @@
+  .l-inner
+    = render partial: 'shared/sidebar'
+
+    .p-notice
+      - @notices.each do |notice|
+        - if notice.notice_type == 'follow' && !notice.read?
+          .c-notice-item
+            .c-notice-item__left
+              .c-notice-item__image 
+                = image_tag "default_avatar.webp"
+              .c-notice-item__container 
+                .c-notice-item__avatar
+                  = image_tag notice.sender.avatar
+                .c-notice-item__text 
+                  = link_to notice.sender.display_name, user_path(notice.sender)
+                  | さんにフォローされました。
+            .c-notice-item__right 
+              = link_to '既読にする', user_notice_path(current_user, notice), data: { turbo_method: :patch }
+        - if notice.notice_type == 'like' && !notice.read?
+           .c-notice-item
+            .c-notice-item__left
+              .c-notice-item__image 
+                = image_tag "notice-heart.png"
+              .c-notice-item__container 
+                .c-notice-item__avatar
+                  = image_tag notice.sender.avatar
+                .c-notice-item__text 
+                  = link_to notice.sender.display_name, user_path(notice.sender)
+                  | さんにいいねされました。
+                .c-notice-item__original
+                  = link_to tweet_path(notice.like.tweet) do 
+                    = notice.like.tweet.content
+            .c-notice-item__right 
+              = link_to '既読にする', user_notice_path(current_user, notice), data: { turbo_method: :patch }
+        - if notice.notice_type == 'retweet' && !notice.read?
+         .c-notice-item
+            .c-notice-item__left
+              .c-notice-item__image 
+                = image_tag "notice-retweet.png"
+              .c-notice-item__container 
+                .c-notice-item__avatar
+                  = image_tag notice.sender.avatar
+                .c-notice-item__text 
+                  = link_to notice.sender.display_name, user_path(notice.sender)
+                  | さんにリツイートされました。
+                .c-notice-item__original
+                  = link_to tweet_path(notice.retweet.tweet) do 
+                    = notice.retweet.tweet.content
+            .c-notice-item__right 
+              = link_to '既読にする', user_notice_path(current_user, notice), data: { turbo_method: :patch }
+        - if notice.notice_type == 'reply' && !notice.read?
+          .c-notice-item
+            .c-notice-item__left
+              .c-notice-item__image 
+                = image_tag "notice-reply.png"
+              .c-notice-item__container 
+                .c-notice-item__avatar
+                  = image_tag notice.sender.avatar
+                .c-notice-item__text 
+                  = link_to notice.sender.display_name, user_path(notice.sender)
+                  | さんにリプライされました。
+                .c-notice-item__original
+                  = link_to tweet_path(id: notice.reply_id) do 
+                    = notice.reply.content
+            .c-notice-item__right 
+              = link_to '既読にする', user_notice_path(current_user, notice), data: { turbo_method: :patch }

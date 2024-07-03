@@ -63,6 +63,13 @@ class User < ApplicationRecord
 
   has_many :messages, dependent: :destroy
 
+  has_many :send_notices, class_name: 'Notice', foreign_key: 'sender_id', dependent: :destroy,
+                          inverse_of: :sender
+  has_many :noticed_users, through: :send_notices, source: :receiver
+  has_many :received_notices, class_name: 'Notice', foreign_key: 'receiver_id', dependent: :destroy,
+                              inverse_of: :receiver
+  has_many :received_users, through: :received_notices, source: :sender
+
   has_one_attached :avatar
   has_one_attached :header_image
 

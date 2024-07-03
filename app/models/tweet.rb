@@ -7,7 +7,6 @@
 #  id              :bigint           not null, primary key
 #  user_id         :bigint           not null
 #  content         :text             not null
-#  parent_id       :bigint
 #  likes_count     :integer          default(0), not null
 #  retweets_count  :integer          default(0), not null
 #  created_at      :datetime         not null
@@ -26,8 +25,14 @@ class Tweet < ApplicationRecord
   has_many :bookmarks, dependent: :destroy
   has_many :bookmarked_users, through: :bookmarks, source: :user
 
-  belongs_to :parent, class_name: 'Tweet', optional: true, inverse_of: :replies
-  has_many :replies, class_name: 'Tweet', foreign_key: 'parent_id', dependent: :destroy, inverse_of: :parent
+  # belongs_to :parent, class_name: 'Tweet', optional: true, inverse_of: :replies
+  # has_many :replies, class_name: 'Tweet', foreign_key: 'parent_id', dependent: :destroy, inverse_of: :parent
+  has_one :active_relationship, class_name: 'Reply', foreign_key: 'reply_id', dependent: :destroy,
+                                inverse_of: :reply
+  has_one :parent, through: :active_relationship, source: :parent
+  has_many :passive_relationships, class_name: 'Reply', foreign_key: 'parent_id', dependent: :destroy,
+                                   inverse_of: :parent
+  has_many :replies, through: :passive_relationships, source: :reply
 
   has_one_attached :image
 
