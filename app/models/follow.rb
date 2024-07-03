@@ -13,4 +13,16 @@
 class Follow < ApplicationRecord
   belongs_to :following, class_name: 'User', inverse_of: :active_relationships
   belongs_to :followed, class_name: 'User', inverse_of: :passive_relationships
+
+  include Notifiable
+
+  private
+
+  def notification_sender
+    following
+  end
+
+  def notification_receiver
+    followed
+  end
 end

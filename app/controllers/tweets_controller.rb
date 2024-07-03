@@ -18,7 +18,7 @@ class TweetsController < ApplicationController
     @replies = @tweet.replies.includes(image_attachment: :blob,
                                        user: { avatar_attachment: :blob })
                      .page(params[:page]).per(10).order(created_at: :desc)
-    @reply = @tweet.replies.build
+    @reply_tweet = current_user.tweets.build
   end
 
   def create
@@ -36,11 +36,10 @@ class TweetsController < ApplicationController
 
   def reply_create
     @tweet = Tweet.find(params[:tweet_id])
-    @reply = @tweet.replies.build(tweet_params)
-    @reply.user = current_user
+    @reply_tweet = current_user.tweets.build(tweet_params)
     @replies = @tweet.replies
-
-    if @reply.save
+    if @reply_tweet.save
+      Reply.create(parent_id: @tweet.id, reply_id: @reply_tweet.id)
       redirect_to tweet_path(@tweet), notice: '返信が投稿されました'
 
     else
