@@ -20,6 +20,8 @@ services:
       - db
     tty: true
     stdin_open: true
+    environment:
+      - LAUNCHY_DEBUG=true
   js:
     image: rails_template:latest
     command: yarn build --watch
