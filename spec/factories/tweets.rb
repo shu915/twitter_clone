@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :tweet do
     association :user
-    content { "ツイートです" }
+    content { 'ツイートです' }
 
     after(:build) do |tweet|
       tweet.image.attach(io: File.open('spec/image/image.jpg'), filename: 'image.jpg')

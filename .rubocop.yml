@@ -24,3 +24,9 @@ Hc/RailsSpecificActionName:
   Exclude:
     - app/controllers/users/omniauth_callbacks_controller.rb
     - app/controllers/tweets_controller.rb
+RSpec/MultipleExpectations:
+  Enabled: false
+RSpec/ContextWording:
+  Enabled: false
+RSpec/ExampleLength:
+  Max: 15

@@ -35,32 +35,31 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  describe "ユーザーの新規作成するとき" do
-    context "入力項目が揃っているので" do
-      let(:user){ FactoryBot.create(:user) }
+  describe 'ユーザーの新規作成するとき' do
+    context '入力項目が揃っているので' do
+      let(:user) { FactoryBot.create(:user) }
 
-      it "ユーザーが作れる" do
+      it 'ユーザーが作れる' do
         expect(user).to be_valid
       end
     end
 
-    context "メールをnilにして" do
-      let(:user){ FactoryBot.build(:user, :empty_email) }
+    context 'メールをnilにして' do
+      let(:user) { FactoryBot.build(:user, :empty_email) }
 
-      it "emailのバリデーションに引っかかる" do
+      it 'emailのバリデーションに引っかかる' do
         user.valid?
-        expect(user.errors[:email]).to include("を入力してください")
+        expect(user.errors[:email]).to include('を入力してください')
       end
     end
 
-    context "account_nameをnilにして" do
-      let(:user){ FactoryBot.build(:user, :empty_account_name) }
+    context 'account_nameをnilにして' do
+      let(:user) { FactoryBot.build(:user, :empty_account_name) }
 
-      it "account_nameのバリデーションに引っかかる" do
+      it 'account_nameのバリデーションに引っかかる' do
         user.valid?
-        expect(user.errors[:account_name]).to include("を入力してください")
+        expect(user.errors[:account_name]).to include('を入力してください')
       end
     end
-
   end
 end

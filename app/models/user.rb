@@ -37,7 +37,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :confirmable, :lockable, :timeoutable, :trackable, :omniauthable, omniauth_providers: %i[github]
 
-
   has_many :authorizations, dependent: :destroy
 
   has_many :active_relationships, class_name: 'Follow', foreign_key: 'following_id', dependent: :destroy,
@@ -78,7 +77,7 @@ class User < ApplicationRecord
   validates :account_name, presence: true, uniqueness: true, length: { maximum: 20 }
   validates :display_name, presence: true, length: { maximum: 20 }
   validates :tel, presence: true, length: { maximum: 20 }, numericality: { only_integer: true }
-  validates :birthday, presence: true, date: { message: "有効な日付を入れてください" }
+  validates :birthday, presence: true, date: { message: '有効な日付を入れてください' }
 
   validates :location, length: { maximum: 25 }
   validates :url, length: { maximum: 255 },

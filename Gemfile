@@ -55,6 +55,7 @@ gem 'bootsnap', require: false
 gem 'active_storage_validations'
 gem 'aws-sdk-s3'
 gem 'counter_culture'
+gem 'date_validator'
 gem 'devise'
 gem 'html2slim'
 gem 'importmap-rails'
@@ -64,7 +65,6 @@ gem 'omniauth'
 gem 'omniauth-github'
 gem 'omniauth-rails_csrf_protection'
 gem 'slim'
-gem 'date_validator'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -73,7 +73,6 @@ group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'dotenv-rails'
   gem 'letter_opener_web'
-
 end
 
 group :development do
@@ -96,8 +95,8 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
+  gem 'factory_bot_rails'
+  gem 'rspec-rails'
   gem 'selenium-webdriver'
   gem 'webdrivers'
-  gem 'rspec-rails'
-  gem 'factory_bot_rails'
 end
