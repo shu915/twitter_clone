@@ -26,7 +26,7 @@ module Myapp
                        view_specs: false,
                        helper_specs: false,
                        routing_specs: false
-      g.factory_bot false
+      g.factory_bot dir: "spec/factories"
     end
     config.action_view.default_form_builder = 'ApplicationFormBuilder'
 

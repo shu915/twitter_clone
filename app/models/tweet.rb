@@ -25,8 +25,7 @@ class Tweet < ApplicationRecord
   has_many :bookmarks, dependent: :destroy
   has_many :bookmarked_users, through: :bookmarks, source: :user
 
-  # belongs_to :parent, class_name: 'Tweet', optional: true, inverse_of: :replies
-  # has_many :replies, class_name: 'Tweet', foreign_key: 'parent_id', dependent: :destroy, inverse_of: :parent
+
   has_one :active_relationship, class_name: 'Reply', foreign_key: 'reply_id', dependent: :destroy,
                                 inverse_of: :reply
   has_one :parent, through: :active_relationship, source: :parent
