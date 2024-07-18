@@ -40,7 +40,7 @@ module Users
 
     # If you have extra params to permit, append them to the sanitizer.
     def configure_sign_up_params
-      devise_parameter_sanitizer.permit(:sign_up, keys: %i[tel birthday])
+      devise_parameter_sanitizer.permit(:sign_up, keys: %i[account_name display_name tel birthday])
     end
 
     # If you have extra params to permit, append them to the sanitizer.
@@ -55,7 +55,7 @@ module Users
 
     # The path used after sign up for inactive accounts.
     def after_inactive_sign_up_path_for(_resource)
-      new_user_session_path(status: :see_other)
+      new_user_session_path
     end
   end
 end

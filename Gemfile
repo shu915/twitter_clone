@@ -55,6 +55,7 @@ gem 'bootsnap', require: false
 gem 'active_storage_validations'
 gem 'aws-sdk-s3'
 gem 'counter_culture'
+gem 'date_validator'
 gem 'devise'
 gem 'html2slim'
 gem 'importmap-rails'
@@ -71,9 +72,7 @@ group :development, :test do
   gem 'bullet'
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'dotenv-rails'
-  gem 'factory_bot_rails'
   gem 'letter_opener_web'
-  gem 'rspec-rails'
 end
 
 group :development do
@@ -96,6 +95,8 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
+  gem 'factory_bot_rails'
+  gem 'rspec-rails'
   gem 'selenium-webdriver'
   gem 'webdrivers'
 end
