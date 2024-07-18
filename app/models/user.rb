@@ -36,6 +36,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :confirmable, :lockable, :timeoutable, :trackable, :omniauthable, omniauth_providers: %i[github]
+
   has_many :authorizations, dependent: :destroy
 
   has_many :active_relationships, class_name: 'Follow', foreign_key: 'following_id', dependent: :destroy,
@@ -73,12 +74,11 @@ class User < ApplicationRecord
   has_one_attached :avatar
   has_one_attached :header_image
 
-  validates :tel, presence: true, length: { maximum: 20 }, numericality: { only_integer: true }
-  validates :birthday, presence: true,
-                       format: { with: /\A\d{4}-\d{1,2}-\d{1,2}\z/, message: 'は「YYYY-MM-DD」の形式で入力してください' }
-
   validates :account_name, presence: true, uniqueness: true, length: { maximum: 20 }
   validates :display_name, presence: true, length: { maximum: 20 }
+  validates :tel, presence: true, length: { maximum: 20 }, numericality: { only_integer: true }
+  validates :birthday, presence: true, date: { message: '有効な日付を入れてください' }
+
   validates :location, length: { maximum: 25 }
   validates :url, length: { maximum: 255 },
                   format: { with: %r{\A(https?://)}i, message: 'は有効ではありません', allow_blank: true }
