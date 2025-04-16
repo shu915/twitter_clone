@@ -109,10 +109,19 @@ class User < ApplicationRecord
   private
 
   def attach_default_avatar_and_header
-    avatar.attach(io: File.open(Rails.root.join('app/assets/images/default_avatar.webp')),
-                  filename: 'default_avatar.webp', content_type: 'image/webp')
+    avatar_path = Rails.root.join('app/assets/images/default_avatar.webp')
+    header_path = Rails.root.join('app/assets/images/default_header.webp')
 
-    header_image.attach(io: File.open(Rails.root.join('app/assets/images/default_header.webp')),
-                        filename: 'default_header.webp', content_type: 'image/webp')
+    if File.exist?(avatar_path) && File.exist?(header_path)
+      avatar.attach(io: File.open(avatar_path),
+                    filename: 'default_avatar.webp', content_type: 'image/webp')
+
+      header_image.attach(io: File.open(header_path),
+                          filename: 'default_header.webp', content_type: 'image/webp')
+    else
+      Rails.logger.error("Default avatar or header image not found: #{avatar_path}, #{header_path}")
+    end
+  rescue StandardError => e
+    Rails.logger.error("Failed to attach default images: #{e.message}")
   end
 end
