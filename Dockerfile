@@ -1,4 +1,4 @@
-FROM node:14.17.6 as node
+FROM  node:14.17.6 as node
 FROM ruby:3.2.1
 COPY --from=node /opt/yarn-* /opt/yarn
 COPY --from=node /usr/local/bin/node /usr/local/bin/
@@ -36,7 +36,6 @@ COPY . /myapp
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
-EXPOSE 3000
 
 # Start the main process.
-CMD ["rails", "server", "-b", "0.0.0.0"]
+CMD ["rails", "server", "-b", "0.0.0.0", "-p", "80"]
