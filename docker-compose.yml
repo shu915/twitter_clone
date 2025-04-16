@@ -22,6 +22,7 @@ services:
     stdin_open: true
     environment:
       - LAUNCHY_DEBUG=true
+      - RAILS_PROD_MASTER_KEY=${RAILS_PROD_MASTER_KEY}
   js:
     image: rails_template:latest
     command: yarn build --watch

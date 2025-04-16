@@ -16,7 +16,7 @@ class UsersController < ApplicationController
                                                 user: { avatar_attachment: :blob }).order(created_at: :desc)
                      .page(params[:page]).per(10)
               when 'reply'
-                @user.tweets.where.not(parent_id: nil).includes(image_attachment: :blob)
+                @user.tweets.joins(:replies).includes(:replies, image_attachment: :blob)
                      .order(created_at: :desc).page(params[:page]).per(10)
               else
                 @user.tweets.includes(image_attachment: :blob)
