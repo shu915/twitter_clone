@@ -51,13 +51,3 @@ jobs:
           task-definition: ${{ env.ECS_TASK_DEFINITION_NAME }}
           service: ${{ env.ECS_SERVICE_NAME }}
           cluster: ${{ env.ECS_CLUSTER_NAME }}
-
-      - name: Update ECS service
-        id: update-ecs-service
-        uses: aws-actions/amazon-ecs-deploy-service-task@v2
-        with:
-          service: ${{ env.ECS_SERVICE_NAME }}
-          cluster: ${{ env.ECS_CLUSTER_NAME }}
-          task-definition: ${{ env.ECS_TASK_DEFINITION_NAME }}
-          wait-for-service-stability: true
-          force-new-deployment: true
