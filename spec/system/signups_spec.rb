@@ -43,7 +43,7 @@ RSpec.describe 'ユーザーの新規登録のシステムスペック', type: :
   end
 
   context 'すでに同じメールで登録しているので' do
-    let(:user) { FactoryBot.create(:user) }
+    let!(:user) { FactoryBot.create(:user) }
 
     scenario '登録失敗する' do
       visit new_user_registration_path
@@ -79,7 +79,7 @@ RSpec.describe 'ユーザーの新規登録のシステムスペック', type: :
   end
 
   context 'すでに同じアカウントネームで登録しているので' do
-    let(:user) { FactoryBot.create(:user) }
+    let!(:user) { FactoryBot.create(:user) }
 
     scenario '登録失敗する' do
       visit new_user_registration_path
