@@ -5,6 +5,15 @@ on:
     branches:
       - main
 
+env:
+  ECS_CLUSTER_NAME: xclone-cluster
+  ECS_SERVICE_NAME: xclone-service
+  ECS_TASK_DEFINITION_NAME: xclone-task-definition
+  ECR_REGISTRY_NAME: xclone-ecr
+  ECR_REGISTRY_URI: 575357958164.dkr.ecr.ap-northeast-1.amazonaws.com
+  AWS_REGION: ap-northeast-1
+  AWS_ROLE_TO_ASSUME: arn:aws:iam::575357958164:role/xclone-github-actions
+
 permissions:
   id-token: write
   contents: read
@@ -21,16 +30,34 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          role-to-assume: arn:aws:iam::575357958164:role/xclone-github-actions
-          aws-region: ap-northeast-1
+          role-to-assume: ${{ env.AWS_ROLE_TO_ASSUME }}
+          aws-region: ${{ env.AWS_REGION }}
 
       - name: Login to ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-      - name: webapp push to ECR
-        id: build-and-push-xclone
-        run: | 
-          docker build -t xclone-ecr .
-          docker tag xclone-ecr:latest 575357958164.dkr.ecr.ap-northeast-1.amazonaws.com/xclone-ecr:latest
-          docker push 575357958164.dkr.ecr.ap-northeast-1.amazonaws.com/xclone-ecr:latest
+      - name: Build and push image to ECR
+        id: build-and-push
+        run: |
+          docker build -t $ECR_REGISTRY_NAME .
+          docker tag $ECR_REGISTRY_NAME:latest $ECR_REGISTRY_URI/$ECR_REGISTRY_NAME:latest
+          docker push $ECR_REGISTRY_URI/$ECR_REGISTRY_NAME:latest
+
+      - name: update ECS task definition
+        id: update-ecs-task-definition
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v2
+        with:
+          task-definition: ${{ env.ECS_TASK_DEFINITION_NAME }}
+          service: ${{ env.ECS_SERVICE_NAME }}
+          cluster: ${{ env.ECS_CLUSTER_NAME }}
+
+      - name: Update ECS service
+        id: update-ecs-service
+        uses: aws-actions/amazon-ecs-deploy-service-task@v2
+        with:
+          service: ${{ env.ECS_SERVICE_NAME }}
+          cluster: ${{ env.ECS_CLUSTER_NAME }}
+          task-definition: ${{ env.ECS_TASK_DEFINITION_NAME }}
+          wait-for-service-stability: true
+          force-new-deployment: true
