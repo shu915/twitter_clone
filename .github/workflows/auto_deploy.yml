@@ -1,0 +1,32 @@
+name: Auto Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: arn:aws:iam::575357958164:role/xclone-github-actions
+          aws-region: ap-northeast-1
+
+      - name: Login to ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: webapp push to ECR
+        id: build-and-push-xclone
+        run: | 
+          docker build -t xclone-ecr .
+          docker tag xclone-ecr:latest 575357958164.dkr.ecr.ap-northeast-1.amazonaws.com/xclone-ecr:latest
+          docker push 575357958164.dkr.ecr.ap-northeast-1.amazonaws.com/xclone-ecr:latest
